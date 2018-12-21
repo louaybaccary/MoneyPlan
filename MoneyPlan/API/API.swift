@@ -10,14 +10,16 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 class API: NSObject {
-    class func  register(username :String,email : String , password : String ){
-        let url = "http://127.0.0.1:3000/register/"+username+"/"+email+"/"+password
+    class func  register(username :String,email : String , password : String ,money : String){
+        let url = "http://127.0.0.1:3000/register/"+username+"/"+email+"/"+password+"/"+money
      Alamofire.request(url)
     
 }
-    class func setMoney(money : String){
-        let url = "http://127.0.0.1:3000/setMoney/"+money
+   /* class func login(username : String , password : String)
+    {
+        let url = "http://127.0.0.1:3000/register/"+username+"/"+email+"/"+password+"/"+money
         Alamofire.request(url)
         
-    }
+    }*/
+
 }
