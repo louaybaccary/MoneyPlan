@@ -20,7 +20,10 @@ class RegisterViewController: UIViewController {
     
 
     @IBAction func btnValidate(_ sender: Any) {
-        
+        //TODO
+        //Check unique username
+        //TODO
+        //Controle de saisie
         
        API.register(username: textUsername.text!, email: textEmail.text!, password: textPassword.text!, money: String(textMoney.text!))
        // print(textUsername.text!)

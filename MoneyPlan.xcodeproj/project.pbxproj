@@ -14,8 +14,10 @@
 		8853918A21C3B1D80010BD24 /* MoneyPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8853918821C3B1D80010BD24 /* MoneyPlan.xcdatamodeld */; };
 		8853918C21C3B1EB0010BD24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8853918B21C3B1EB0010BD24 /* Assets.xcassets */; };
 		8853918F21C3B1EB0010BD24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8853918D21C3B1EB0010BD24 /* LaunchScreen.storyboard */; };
+		8857422721D10B530065792D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857422621D10B530065792D /* MainPageViewController.swift */; };
 		8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882FD1F21CCF03A009B132E /* RegisterViewController.swift */; };
 		8882FD2321CCF61B009B132E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882FD2221CCF61B009B132E /* API.swift */; };
+		88EAD8C721CF99760086FF19 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAD8C621CF99760086FF19 /* LoginViewController.swift */; };
 		AB1C6B5AE6A337B4DF74318D /* Pods_MoneyPlan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0495BE7A605F9002C525A7 /* Pods_MoneyPlan.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +33,10 @@
 		8853918B21C3B1EB0010BD24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8853918E21C3B1EB0010BD24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8853919021C3B1EB0010BD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8857422621D10B530065792D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		8882FD1F21CCF03A009B132E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8882FD2221CCF61B009B132E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		88EAD8C621CF99760086FF19 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ECC60D74B19BADE852822470 /* Pods-MoneyPlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyPlan.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +81,9 @@
 		8853918021C3B1D70010BD24 /* MoneyPlan */ = {
 			isa = PBXGroup;
 			children = (
+				8857422521D10B320065792D /* MainPage */,
+				8857422121D1061A0065792D /* Ressources */,
+				88EAD8C521CF995A0086FF19 /* Login */,
 				8882FD2121CCF5CB009B132E /* API */,
 				8853919621C3C1B40010BD24 /* Register */,
 				8853918121C3B1D80010BD24 /* AppDelegate.swift */,
@@ -99,12 +106,35 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		8857422121D1061A0065792D /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
+		8857422521D10B320065792D /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				8857422621D10B530065792D /* MainPageViewController.swift */,
+			);
+			path = MainPage;
+			sourceTree = "<group>";
+		};
 		8882FD2121CCF5CB009B132E /* API */ = {
 			isa = PBXGroup;
 			children = (
 				8882FD2221CCF61B009B132E /* API.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		88EAD8C521CF995A0086FF19 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				88EAD8C621CF99760086FF19 /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		969145B9D7E44D0FC11487AD /* Pods */ = {
@@ -195,6 +225,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -202,6 +233,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +270,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8857422721D10B530065792D /* MainPageViewController.swift in Sources */,
+				88EAD8C721CF99760086FF19 /* LoginViewController.swift in Sources */,
 				8853918421C3B1D80010BD24 /* ViewController.swift in Sources */,
 				8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */,
 				8853918A21C3B1D80010BD24 /* MoneyPlan.xcdatamodeld in Sources */,
