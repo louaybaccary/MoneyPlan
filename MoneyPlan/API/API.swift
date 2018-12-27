@@ -23,22 +23,65 @@ class API: NSObject {
             switch response.result
             {
             case .failure:
-                print(response)
+            
                 completion(false)
             case .success:
                 if (response.value as? NSDictionary) != nil {
                           let dict = response.value as? NSDictionary
                         let user = dict!["users"] as? NSArray
+                   
                         if user!.count > 0 {
-                            print(user!.count)
+                     
+                        
                                                 completion(true)
                                                 }
                                             else {
-                                                 print(user!.count)
+                            
                                                 completion(false)
                             }
                 }
             }
         }
 }
-}
+    class func  Add(name :String,image : String , type : String , category : String , money : String ,userID : String)
+    {
+        //let url = "http://127.0.0.1:3000/register/"+username+"/"+email+"/"+password+"/"+money
+       // Alamofire.request(url)
+        
+    }
+    class func getUser(username : String , completion :@escaping(_ error :Error?,_ userdata : User)-> Void)
+        {
+    let url = "http://127.0.0.1:3000/getUser/"+username
+            Alamofire.request(url).responseJSON {response in
+                switch response.result {
+                case .failure(let error) :
+                    completion(error,User())
+                    print(error)
+                case .success(let value) :
+                    let json = JSON(value)
+                    guard let dataArr = json["user"].array else {
+                        completion(nil,User())
+                        return
+                    }
+                    //var userdata = [User]()
+                    for data in dataArr {
+                        guard let data = data.dictionary else {
+                            return
+                        }
+                        let userdata = User()
+                        userdata.id = data["id"]?.int ?? 0
+                        userdata.email = data["email"]?.string ?? "no data"
+                        userdata.password = data["password"]?.string ?? "no data"
+                        userdata.username = data["username"]?.string ?? "no data"
+                        userdata.money = data["money"]?.int ?? 0
+                    
+                        completion(nil,userdata)
+                    }
+                    completion(nil,User())
+                }
+            }
+        }
+        }
+    
+
+
