@@ -81,6 +81,12 @@ class API: NSObject {
                 }
             }
         }
+    class func  AddTarget(username :String,name : String , money : String ,category : String,image : String,type :String)
+    {
+        let url = "http://127.0.0.1:3000/Insert/"+name+"/"+image+"/"+type+"/"+category+"/"+money+"/"+username
+        Alamofire.request(url)
+       
+    }
         }
     
 

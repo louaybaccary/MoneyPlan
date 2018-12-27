@@ -10,10 +10,10 @@ import UIKit
 
 class IconsViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegate  {
 
-    @IBOutlet weak var collectionview: UICollectionView!
-    @IBOutlet weak var images: UICollectionView!
+    
     let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
     
+    @IBOutlet weak var collectionview: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
