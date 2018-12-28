@@ -120,6 +120,12 @@ class API: NSObject {
             }
         }
     }
+    class func  deleteTransaction(id :String)
+    {
+        let url = "http://127.0.0.1:3000/Delete/"+id
+        Alamofire.request(url)
+        
+    }
         }
     
 

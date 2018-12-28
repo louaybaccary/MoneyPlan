@@ -49,6 +49,17 @@ class ShowTargetVC: UIViewController , UITableViewDataSource,UITableViewDelegate
         money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete){
+           
+            
+           
+            API.deleteTransaction(id: String(transactions[indexPath.item].id))
+            
+                tableView.deleteRows(at: [indexPath], with: .fade)
+         
+        }
 
 
+}
 }
