@@ -14,20 +14,7 @@ class ShowTargetVC: UIViewController , UITableViewDataSource,UITableViewDelegate
     
     @IBOutlet weak var tableView: UITableView!
     var transactions = [Transaction]()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("hey")
-        
-        API.getTransaction(username: "1",type : "target") { (error :Error?, transactions : [Transaction]?) in
-            if let transactions = transactions {
-                self.transactions = transactions
-                print(transactions[0].name)
-                print(transactions.count)
-                self.tableView.reloadData()
-            }
-        }
-
-    }
+   
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -45,21 +32,35 @@ class ShowTargetVC: UIViewController , UITableViewDataSource,UITableViewDelegate
         let money = cell!.viewWithTag(4) as! UILabel
         image.image = UIImage (named: Images[indexPath.item])
        name.text = transactions[indexPath.item].name
-        //print(transactions[indexPath.item].name)
+        print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete){
-           
-            
-           
-            API.deleteTransaction(id: String(transactions[indexPath.item].id))
-            
-                tableView.deleteRows(at: [indexPath], with: .fade)
-         
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let deletAction = UITableViewRowAction(style: .default, title: "Delete") { (UITableViewRowAction
+            , IndexPath) in
+            API.deleteTransaction(id: String(self.transactions[indexPath.item].id))
+            self.tableView.beginUpdates()
+            // ** add below line. **
+            self.transactions.remove(at: IndexPath.row)
+            self.tableView.deleteRows(at: [IndexPath], with: .automatic)
+            self.tableView.endUpdates()
         }
-
+ 
+return [deletAction]
 
 }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        API.getTransaction(username: "1",type : "target") { (error :Error?, transactions : [Transaction]?) in
+            if let transactions = transactions {
+                
+                self.transactions = transactions
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+
 }

@@ -12,13 +12,20 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
 
     var Category = ""
     var Image = ""
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]
+        // Do any additional setup after loading the view.
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "target", for: indexPath) as!  UICollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "target", for: indexPath)
         
         let image = cell.viewWithTag(1) as! UIImageView
         
@@ -31,27 +38,20 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     }
     let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
     @IBOutlet weak var textName: UITextField!
-    
     @IBOutlet weak var textMoney: UITextField!
+ 
     @IBAction func btnAdd(_ sender: Any) {
-        API.AddTarget(username: "1", name: textName.text!, money: textMoney.text!, category: Category, image: Image,type: "target")
+        let name = textName.text
+        let money = textMoney.text
+        API.AddTarget(username: "1", name: name!, money: money!, category: Category, image: Image,type: "target")
         print(Category+Image)
     }
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.picker.delegate = self
-        self.picker.dataSource = self
-        pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]
-        // Do any additional setup after loading the view.
-        
-    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -69,7 +69,4 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
-    
-
 }

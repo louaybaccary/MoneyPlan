@@ -26,6 +26,7 @@ class API: NSObject {
             
                 completion(false)
             case .success:
+                print(response.value)
                 if (response.value as? NSDictionary) != nil {
                           let dict = response.value as? NSDictionary
                         let user = dict!["users"] as? NSArray
@@ -114,9 +115,9 @@ class API: NSObject {
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
                     transactions.append(transaction)
-                   
+                    
                 }
-             completion(nil,transactions)
+                completion(nil,transactions)
             }
         }
     }
