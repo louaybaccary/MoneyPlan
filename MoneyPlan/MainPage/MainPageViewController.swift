@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class MainPageViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     var currentUser : String?
 
@@ -64,4 +64,30 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     }
     
 }
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let plusAction = UITableViewRowAction(style: .normal, title: "+") { (UITableViewRowAction
+            , IndexPath) in
+            let alert = SCLAlertView()
+            let txt = alert.addTextField("Enter the amount of money")
+            alert.addButton("+") {
+                print(self.transactions[indexPath.row].id)
+                API.setCurrentMoney(money: txt.text!, id: String(self.transactions[indexPath.row].id), userID: "1")
+            }
+            alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+        }
+        let minusAction = UITableViewRowAction(style: .default, title: "-") { (UITableViewRowAction
+            , IndexPath) in
+            let alert = SCLAlertView()
+            let txt = alert.addTextField("Enter the amount of money")
+            alert.addButton("-") {
+                print(self.transactions[indexPath.row].id)
+                API.setCurrentMoney(money: txt.text!, id: String(self.transactions[indexPath.row].id), userID: "1")
+            }
+            alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+        }
+        
+        return [plusAction,minusAction]
+        
+    }
 }
