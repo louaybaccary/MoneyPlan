@@ -114,6 +114,7 @@ class API: NSObject {
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
+                    transaction.currentMoney = data["currentMoney"]?.int ?? 0
                     transactions.append(transaction)
                     
                 }
@@ -124,6 +125,12 @@ class API: NSObject {
     class func  deleteTransaction(id :String)
     {
         let url = "http://127.0.0.1:3000/Delete/"+id
+        Alamofire.request(url)
+        
+    }
+    class func  setCurrentMoney(money :String,id : String , userID : String)
+    {
+        let url = "http://127.0.0.1:3000/Delete/"+money+"/"+id+"/"+userID
         Alamofire.request(url)
         
     }

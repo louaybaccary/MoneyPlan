@@ -32,10 +32,15 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         let contentView = cell?.viewWithTag(1)
         //let image = contentView?.viewWithTag(2) as! UIImageView
         let name = cell!.viewWithTag(2) as! UILabel
+        let currentMoney = cell!.viewWithTag(4) as! UIProgressView
+        let money = cell!.viewWithTag(3) as! UILabel
         //let money = cell!.viewWithTag(4) as! UILabel
       //  image.image = UIImage (named: Images[indexPath.item])
         name.text = transactions[indexPath.item].name
+        var per = ((transactions[indexPath.item].currentMoney) * (transactions[indexPath.item].trMoney)) / 100
+       currentMoney.setProgress(Float(per), animated: false)
         print(transactions[indexPath.item].name)
+        money.text = String(transactions[indexPath.item].trMoney)
        // money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
