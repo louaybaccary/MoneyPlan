@@ -130,7 +130,7 @@ class API: NSObject {
     }
     class func  setCurrentMoney(money :String,id : String , userID : String)
     {
-        let url = "http://127.0.0.1:3000/Delete/"+money+"/"+id+"/"+userID
+        let url = "http://127.0.0.1:3000/setCurrentMoney/"+money+"/"+id+"/"+userID
         Alamofire.request(url)
         
     }

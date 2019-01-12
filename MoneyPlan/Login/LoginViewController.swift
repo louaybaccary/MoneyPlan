@@ -27,9 +27,6 @@ class LoginViewController: UIViewController {
             success in
             if success{
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                
-                
-                
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
                 nextViewController.currentUser = self.textUsername.text!
                 self.present(nextViewController, animated:true, completion:nil)
