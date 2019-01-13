@@ -15,6 +15,8 @@
 		8853918C21C3B1EB0010BD24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8853918B21C3B1EB0010BD24 /* Assets.xcassets */; };
 		8853918F21C3B1EB0010BD24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8853918D21C3B1EB0010BD24 /* LaunchScreen.storyboard */; };
 		8857422721D10B530065792D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857422621D10B530065792D /* MainPageViewController.swift */; };
+		885997A921EBA9DB000B6A19 /* ShowWishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997A821EBA9DB000B6A19 /* ShowWishVC.swift */; };
+		885997AB21EBB544000B6A19 /* AddWishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997AA21EBB544000B6A19 /* AddWishVC.swift */; };
 		88614C6221D5715F00794276 /* AddTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6121D5715F00794276 /* AddTargetVC.swift */; };
 		88614C6421D6483500794276 /* ShowTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6321D6483500794276 /* ShowTargetVC.swift */; };
 		88614C6621D6483500794276 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6521D6483500794276 /* Transaction.swift */; };
@@ -38,6 +40,8 @@
 		8853918E21C3B1EB0010BD24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8853919021C3B1EB0010BD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8857422621D10B530065792D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		885997A821EBA9DB000B6A19 /* ShowWishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowWishVC.swift; sourceTree = "<group>"; };
+		885997AA21EBB544000B6A19 /* AddWishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWishVC.swift; sourceTree = "<group>"; };
 		88614C6121D5715F00794276 /* AddTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTargetVC.swift; sourceTree = "<group>"; };
 		88614C6321D6483500794276 /* ShowTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTargetVC.swift; sourceTree = "<group>"; };
 		88614C6521D6483500794276 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		8853918021C3B1D70010BD24 /* MoneyPlan */ = {
 			isa = PBXGroup;
 			children = (
+				885997A721EBA510000B6A19 /* WhishList */,
 				8849FDDF21D3A33100008EF2 /* Model */,
 				880B6D3421D2446F00A649DE /* Icons */,
 				880B6D3321D23E5C00A649DE /* Target */,
@@ -155,6 +160,15 @@
 				8857422621D10B530065792D /* MainPageViewController.swift */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		885997A721EBA510000B6A19 /* WhishList */ = {
+			isa = PBXGroup;
+			children = (
+				885997A821EBA9DB000B6A19 /* ShowWishVC.swift */,
+				885997AA21EBB544000B6A19 /* AddWishVC.swift */,
+			);
+			path = WhishList;
 			sourceTree = "<group>";
 		};
 		8882FD2121CCF5CB009B132E /* API */ = {
@@ -313,9 +327,11 @@
 				8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */,
 				8853918A21C3B1D80010BD24 /* MoneyPlan.xcdatamodeld in Sources */,
 				8853918221C3B1D80010BD24 /* AppDelegate.swift in Sources */,
+				885997AB21EBB544000B6A19 /* AddWishVC.swift in Sources */,
 				8882FD2321CCF61B009B132E /* API.swift in Sources */,
 				88614C6221D5715F00794276 /* AddTargetVC.swift in Sources */,
 				88DB09AE21D400F7001471C2 /* User.swift in Sources */,
+				885997A921EBA9DB000B6A19 /* ShowWishVC.swift in Sources */,
 				882DBC1621CC1B8E0080078F /* PageViewController.swift in Sources */,
 				88614C6421D6483500794276 /* ShowTargetVC.swift in Sources */,
 			);

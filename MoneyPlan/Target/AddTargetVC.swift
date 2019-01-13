@@ -45,6 +45,9 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
         let money = textMoney.text
         API.AddTarget(username: "1", name: name!, money: money!, category: Category, image: Image,type: "target")
         print(Category+Image)
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Target", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "TargetPage") as! ShowTargetVC
+        self.present(nextViewController, animated:true, completion:nil)
     }
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var picker: UIPickerView!

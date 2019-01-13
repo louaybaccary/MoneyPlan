@@ -143,6 +143,13 @@ class API: NSObject {
         Alamofire.request(url)
         
     }
+    ///Updatetype/32/1
+    class func  moveToTarget(id :String, userID : String)
+    {
+        let url = "http://127.0.0.1:3000/Updatetype/"+id+"/"+userID
+        Alamofire.request(url)
+        
+    }
         }
     
 
