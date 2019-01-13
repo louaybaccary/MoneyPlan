@@ -13,9 +13,50 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
 
     
     @IBOutlet weak var tableView: UITableView!
-    var userData = User()
+    
+    @IBOutlet weak var moneyLabel: UILabel!
+    
+    
+    var myUser = [User]()
     var transactions = [Transaction]()
     let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+     //   moneyLabel.text = "plzzzz"
+        API.getUser(username: "test") { (error :Error?, myUser :[User]?) in
+            if let myUser = myUser {
+                self.myUser = myUser
+                self.reloadInputViews()
+                print("myuser")
+                print(myUser[0].money)
+                print("userdata")
+                print(myUser[0].money)
+                
+                self.moneyLabel.text = String(myUser[0].money)
+                
+                if ( myUser[0].money > 100){
+                    self.moneyLabel.textColor = UIColor.green
+                }
+                else if ( 0 > myUser[0].money ){
+                    self.moneyLabel.textColor = UIColor.red
+                }
+                else {
+                    self.moneyLabel.textColor = UIColor.orange
+                    
+                }
+            }
+        
+        }
+     
+        API.getTransaction(username: "1",type : "target") { (error :Error?, transactions : [Transaction]?) in
+            if let transactions = transactions {
+                self.transactions = transactions
+                self.tableView.reloadData()
+            }
+        }
+        
+        
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -40,25 +81,9 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         money.text = String(transactions[indexPath.item].currentMoney)
         return cell!
     }
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        API.getUser(username: currentUser!) { (error , myUser
-            
-            ) in
-            
-            self.userData.id = myUser.id
-            self.userData.money = myUser.money
     
-        }
-        API.getTransaction(username: "1",type : "target") { (error :Error?, transactions : [Transaction]?) in
-            if let transactions = transactions {
-                self.transactions = transactions
-                self.tableView.reloadData()
-            }
-    }
-    
-}
+   
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let plusAction = UITableViewRowAction(style: .normal, title: "+") { (UITableViewRowAction
@@ -68,6 +93,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             alert.addButton("+") {
                 if ( (self.transactions[indexPath.item].trMoney) > (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)){
                      SCLAlertView().showWarning("Warning", subTitle: "ok")
+                    API.setMoney(money: "-"+txt.text!, userID: "1")
                     API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)), id: String(self.transactions[indexPath.row].id), userID: "1")
                     [Transaction]()
                     self.tableView.reloadData()
@@ -89,6 +115,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
                       SCLAlertView().showWarning("Warning", subTitle: "You can't")
                 } else if ((txt.text!) == ""  || (Int(txt.text!) == 0) || ((txt.text!) == nil)) {
                     SCLAlertView().showWarning("Warning", subTitle: "ok")
+                    API.setMoney(money: txt.text!, userID: "1")
                     API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID: "1")
                     [Transaction]()
                     self.tableView.reloadData()
@@ -103,17 +130,10 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     }
   
     @IBAction func addTransactionBtn(_ sender: Any) {
-        API.getUser(username: currentUser!) { (error , myUser
-            
-            ) in
-            
-            self.userData.id = myUser.id
-            self.userData.money = myUser.money
-            
-        }
+  
         let alert = SCLAlertView()
         let txt = alert.addTextField("Enter the amount of money")
-        alert.addButton("-") {
+        alert.addButton("+") {
       
                 SCLAlertView().showWarning("Warning", subTitle: "ok")
             
@@ -133,7 +153,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBAction func minusTransactionBtn(_ sender: Any) {
         let alert = SCLAlertView()
         let txt = alert.addTextField("Enter the amount of money")
-        alert.addButton("+") {
+        alert.addButton("-") {
             
             SCLAlertView().showWarning("Warning", subTitle: "ok")
             

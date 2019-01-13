@@ -50,21 +50,22 @@ class API: NSObject {
        // Alamofire.request(url)
         
     }
-    class func getUser(username : String , completion :@escaping(_ error :Error?,_ userdata : User)-> Void)
+    class func getUser(username : String , completion :@escaping(_ error :Error?,_ userdata : [User]?)-> Void)
         {
     let url = "http://127.0.0.1:3000/getUser/"+username
             Alamofire.request(url).responseJSON {response in
                 switch response.result {
                 case .failure(let error) :
-                    completion(error,User())
+                    completion(error,nil)
                     print(error)
                 case .success(let value) :
                     let json = JSON(value)
+                    print(json)
                     guard let dataArr = json["user"].array else {
-                        completion(nil,User())
+                        completion(nil,nil)
                         return
                     }
-                    //var userdata = [User]()
+                   var users = [User]()
                     for data in dataArr {
                         guard let data = data.dictionary else {
                             return
@@ -76,9 +77,10 @@ class API: NSObject {
                         userdata.username = data["username"]?.string ?? "no data"
                         userdata.money = data["money"]?.int ?? 0
                     
-                        completion(nil,userdata)
+                       users.append(userdata)
                     }
-                    completion(nil,User())
+                 
+                     completion(nil,users)
                 }
             }
         }
