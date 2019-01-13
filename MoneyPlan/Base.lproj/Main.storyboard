@@ -413,6 +413,23 @@
                                     <outlet property="delegate" destination="lfj-vU-Elm" id="f7Q-gl-Nu7"/>
                                 </connections>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhL-Cs-HAb">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="stop" id="TgD-t3-izF">
+                                        <connections>
+                                            <action selector="minusTransactionBtn:" destination="lfj-vU-Elm" id="AZ2-pj-sG2"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="350" id="2ji-s7-DXo"/>
+                                    <barButtonItem systemItem="add" id="cCH-Vk-YSh">
+                                        <connections>
+                                            <action selector="addTransactionBtn:" destination="lfj-vU-Elm" id="rWF-QY-Zce"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

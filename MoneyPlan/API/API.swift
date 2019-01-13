@@ -134,6 +134,13 @@ class API: NSObject {
         Alamofire.request(url)
         
     }
+   
+    class func  setMoney(money :String, userID : String)
+    {
+        let url = "http://127.0.0.1:3000/setMoney/"+money+"/"+userID
+        Alamofire.request(url)
+        
+    }
         }
     
 

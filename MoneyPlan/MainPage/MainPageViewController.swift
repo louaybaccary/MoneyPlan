@@ -48,6 +48,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             ) in
             
             self.userData.id = myUser.id
+            self.userData.money = myUser.money
     
         }
         API.getTransaction(username: "1",type : "target") { (error :Error?, transactions : [Transaction]?) in
@@ -100,4 +101,49 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         return [plusAction,minusAction]
         
     }
-}
+  
+    @IBAction func addTransactionBtn(_ sender: Any) {
+        API.getUser(username: currentUser!) { (error , myUser
+            
+            ) in
+            
+            self.userData.id = myUser.id
+            self.userData.money = myUser.money
+            
+        }
+        let alert = SCLAlertView()
+        let txt = alert.addTextField("Enter the amount of money")
+        alert.addButton("-") {
+      
+                SCLAlertView().showWarning("Warning", subTitle: "ok")
+            
+            API.setMoney(money: (txt.text!), userID: "1")
+            API.AddTarget(username: "1", name: "added", money: txt.text!, category: "Added", image: "no", type: "Added")
+                self.viewDidLoad()
+          
+            }
+            alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+            }
+
+  
+            
+    
+        
+    
+    @IBAction func minusTransactionBtn(_ sender: Any) {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField("Enter the amount of money")
+        alert.addButton("+") {
+            
+            SCLAlertView().showWarning("Warning", subTitle: "ok")
+            
+            API.setMoney(money: "-"+txt.text!, userID: "1")
+            API.AddTarget(username: "1", name: "added", money: txt.text!, category: "Added", image: "no", type: "Added")
+            self.viewDidLoad()
+            
+        }
+        alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+    }
+    }
+
+
