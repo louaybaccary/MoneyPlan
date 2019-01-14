@@ -13,16 +13,17 @@ class TargetsViewController: UIViewController {
     @IBOutlet weak var finished: UIView!
     @IBOutlet weak var current: UIView!
     @IBAction func switchViews(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            current.alpha = 1
-            finished.alpha = 0
-        } else {
+        if sender.selectedSegmentIndex == 1{
             current.alpha = 0
             finished.alpha = 1
+        } else {
+            current.alpha = 1
+            finished.alpha = 0
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+          self.view.backgroundColor = UIColor(patternImage:UIImage (named: "background")! )
         
         // Do any additional setup after loading the view.
     }
