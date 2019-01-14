@@ -17,6 +17,9 @@
 		8857422721D10B530065792D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857422621D10B530065792D /* MainPageViewController.swift */; };
 		885997A921EBA9DB000B6A19 /* ShowWishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997A821EBA9DB000B6A19 /* ShowWishVC.swift */; };
 		885997AB21EBB544000B6A19 /* AddWishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997AA21EBB544000B6A19 /* AddWishVC.swift */; };
+		885997AD21ED0016000B6A19 /* ShowCurrentTargetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997AC21ED0016000B6A19 /* ShowCurrentTargetsVC.swift */; };
+		885997AF21ED02AE000B6A19 /* ShowCompletedTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997AE21ED02AE000B6A19 /* ShowCompletedTargetVC.swift */; };
+		885997B121ED0730000B6A19 /* TargetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885997B021ED0730000B6A19 /* TargetsViewController.swift */; };
 		88614C6221D5715F00794276 /* AddTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6121D5715F00794276 /* AddTargetVC.swift */; };
 		88614C6421D6483500794276 /* ShowTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6321D6483500794276 /* ShowTargetVC.swift */; };
 		88614C6621D6483500794276 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6521D6483500794276 /* Transaction.swift */; };
@@ -42,6 +45,9 @@
 		8857422621D10B530065792D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		885997A821EBA9DB000B6A19 /* ShowWishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowWishVC.swift; sourceTree = "<group>"; };
 		885997AA21EBB544000B6A19 /* AddWishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWishVC.swift; sourceTree = "<group>"; };
+		885997AC21ED0016000B6A19 /* ShowCurrentTargetsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCurrentTargetsVC.swift; sourceTree = "<group>"; };
+		885997AE21ED02AE000B6A19 /* ShowCompletedTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCompletedTargetVC.swift; sourceTree = "<group>"; };
+		885997B021ED0730000B6A19 /* TargetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetsViewController.swift; sourceTree = "<group>"; };
 		88614C6121D5715F00794276 /* AddTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTargetVC.swift; sourceTree = "<group>"; };
 		88614C6321D6483500794276 /* ShowTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTargetVC.swift; sourceTree = "<group>"; };
 		88614C6521D6483500794276 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -77,6 +83,9 @@
 			children = (
 				88614C6121D5715F00794276 /* AddTargetVC.swift */,
 				88614C6321D6483500794276 /* ShowTargetVC.swift */,
+				885997AC21ED0016000B6A19 /* ShowCurrentTargetsVC.swift */,
+				885997AE21ED02AE000B6A19 /* ShowCompletedTargetVC.swift */,
+				885997B021ED0730000B6A19 /* TargetsViewController.swift */,
 			);
 			path = Target;
 			sourceTree = "<group>";
@@ -324,16 +333,19 @@
 				88EAD8C721CF99760086FF19 /* LoginViewController.swift in Sources */,
 				88614C6621D6483500794276 /* Transaction.swift in Sources */,
 				8853918421C3B1D80010BD24 /* ViewController.swift in Sources */,
+				885997AF21ED02AE000B6A19 /* ShowCompletedTargetVC.swift in Sources */,
 				8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */,
 				8853918A21C3B1D80010BD24 /* MoneyPlan.xcdatamodeld in Sources */,
 				8853918221C3B1D80010BD24 /* AppDelegate.swift in Sources */,
 				885997AB21EBB544000B6A19 /* AddWishVC.swift in Sources */,
 				8882FD2321CCF61B009B132E /* API.swift in Sources */,
 				88614C6221D5715F00794276 /* AddTargetVC.swift in Sources */,
+				885997B121ED0730000B6A19 /* TargetsViewController.swift in Sources */,
 				88DB09AE21D400F7001471C2 /* User.swift in Sources */,
 				885997A921EBA9DB000B6A19 /* ShowWishVC.swift in Sources */,
 				882DBC1621CC1B8E0080078F /* PageViewController.swift in Sources */,
 				88614C6421D6483500794276 /* ShowTargetVC.swift in Sources */,
+				885997AD21ED0016000B6A19 /* ShowCurrentTargetsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

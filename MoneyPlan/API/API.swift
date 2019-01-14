@@ -150,6 +150,74 @@ class API: NSObject {
         Alamofire.request(url)
         
     }
+    class func getCurrentTarget(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
+        let url = "http://127.0.0.1:3000/getCurentTargets/"+username
+        Alamofire.request(url).responseJSON {response in
+            switch response.result {
+            case .failure(let error) :
+                completion(error,nil)
+                print(error)
+            case .success(let value) :
+                let json = JSON(value)
+                print(json)
+                guard let dataArr = json["transactions"].array else {
+                    completion(nil,nil)
+                    return
+                }
+                var transactions = [Transaction]()
+                for data in dataArr {
+                    guard let data = data.dictionary else {
+                        return
+                    }
+                    let transaction = Transaction()
+                    transaction.id = data["id"]?.int ?? 0
+                    transaction.name = data["name"]?.string ?? "no data"
+                    print(transaction.name)
+                    transaction.image = data["image"]?.string ?? "no data"
+                    transaction.category = data["category"]?.string ?? "no data"
+                    transaction.trMoney = data["transaction_money"]?.int ?? 0
+                    transaction.currentMoney = data["currentMoney"]?.int ?? 0
+                    transactions.append(transaction)
+                    
+                }
+                completion(nil,transactions)
+            }
+        }
+    }
+    class func getCompletedTarget(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
+        let url = "http://127.0.0.1:3000/getCompletedTargets/"+username
+        Alamofire.request(url).responseJSON {response in
+            switch response.result {
+            case .failure(let error) :
+                completion(error,nil)
+                print(error)
+            case .success(let value) :
+                let json = JSON(value)
+                print(json)
+                guard let dataArr = json["transactions"].array else {
+                    completion(nil,nil)
+                    return
+                }
+                var transactions = [Transaction]()
+                for data in dataArr {
+                    guard let data = data.dictionary else {
+                        return
+                    }
+                    let transaction = Transaction()
+                    transaction.id = data["id"]?.int ?? 0
+                    transaction.name = data["name"]?.string ?? "no data"
+                    print(transaction.name)
+                    transaction.image = data["image"]?.string ?? "no data"
+                    transaction.category = data["category"]?.string ?? "no data"
+                    transaction.trMoney = data["transaction_money"]?.int ?? 0
+                    transaction.currentMoney = data["currentMoney"]?.int ?? 0
+                    transactions.append(transaction)
+                    
+                }
+                completion(nil,transactions)
+            }
+        }
+    }
         }
     
 
