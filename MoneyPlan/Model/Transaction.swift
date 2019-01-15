@@ -15,4 +15,5 @@ class Transaction: NSObject {
     var image : String = ""
     var category : String = ""
     var currentMoney : Int = 0
+    var type : String = ""
 }

@@ -25,6 +25,9 @@
 		88614C6621D6483500794276 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6521D6483500794276 /* Transaction.swift */; };
 		8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882FD1F21CCF03A009B132E /* RegisterViewController.swift */; };
 		8882FD2321CCF61B009B132E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882FD2221CCF61B009B132E /* API.swift */; };
+		8891819921EDDEC900594706 /* ShowCurrentWishlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8891819821EDDEC900594706 /* ShowCurrentWishlistVC.swift */; };
+		8891819B21EDDEE900594706 /* ShowWhatWishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8891819A21EDDEE900594706 /* ShowWhatWishVC.swift */; };
+		8891819D21EDDF0400594706 /* WhishListViC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8891819C21EDDF0400594706 /* WhishListViC.swift */; };
 		88DB09AE21D400F7001471C2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB09AD21D400F7001471C2 /* User.swift */; };
 		88EAD8C721CF99760086FF19 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EAD8C621CF99760086FF19 /* LoginViewController.swift */; };
 		AB1C6B5AE6A337B4DF74318D /* Pods_MoneyPlan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0495BE7A605F9002C525A7 /* Pods_MoneyPlan.framework */; };
@@ -53,6 +56,9 @@
 		88614C6521D6483500794276 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		8882FD1F21CCF03A009B132E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8882FD2221CCF61B009B132E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		8891819821EDDEC900594706 /* ShowCurrentWishlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCurrentWishlistVC.swift; sourceTree = "<group>"; };
+		8891819A21EDDEE900594706 /* ShowWhatWishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowWhatWishVC.swift; sourceTree = "<group>"; };
+		8891819C21EDDF0400594706 /* WhishListViC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhishListViC.swift; sourceTree = "<group>"; };
 		88DB09AD21D400F7001471C2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		88EAD8C621CF99760086FF19 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ECC60D74B19BADE852822470 /* Pods-MoneyPlan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyPlan.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +182,9 @@
 			children = (
 				885997A821EBA9DB000B6A19 /* ShowWishVC.swift */,
 				885997AA21EBB544000B6A19 /* AddWishVC.swift */,
+				8891819821EDDEC900594706 /* ShowCurrentWishlistVC.swift */,
+				8891819A21EDDEE900594706 /* ShowWhatWishVC.swift */,
+				8891819C21EDDF0400594706 /* WhishListViC.swift */,
 			);
 			path = WhishList;
 			sourceTree = "<group>";
@@ -329,6 +338,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8891819921EDDEC900594706 /* ShowCurrentWishlistVC.swift in Sources */,
+				8891819B21EDDEE900594706 /* ShowWhatWishVC.swift in Sources */,
+				8891819D21EDDF0400594706 /* WhishListViC.swift in Sources */,
 				8857422721D10B530065792D /* MainPageViewController.swift in Sources */,
 				88EAD8C721CF99760086FF19 /* LoginViewController.swift in Sources */,
 				88614C6621D6483500794276 /* Transaction.swift in Sources */,

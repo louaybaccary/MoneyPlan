@@ -59,8 +59,19 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
         }
+        let repeatction = UITableViewRowAction(style: .normal, title: "Repeat") { (UITableViewRowAction
+            , IndexPath) in
+           
+            API.AddTarget(username: "1", name: self.transactions[indexPath.item].name, money: String(self.transactions[indexPath.item].trMoney), category: self.transactions[indexPath.item].category, image: self.transactions[indexPath.item].image, type: "target")
+            API.deleteTransaction(id: String(self.transactions[indexPath.item].id))
+            self.tableView.beginUpdates()
+            // ** add below line. **
+            self.transactions.remove(at: IndexPath.row)
+            self.tableView.deleteRows(at: [IndexPath], with: .automatic)
+            self.tableView.endUpdates()
+        }
         
-        return [deletAction]
+        return [deletAction,repeatction]
         
     }
     
