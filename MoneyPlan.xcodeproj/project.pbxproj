@@ -120,6 +120,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		884ED09F21EE80B6000A8AEB /* Local */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
 		8853917521C3B1D70010BD24 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +148,7 @@
 		8853918021C3B1D70010BD24 /* MoneyPlan */ = {
 			isa = PBXGroup;
 			children = (
+				884ED09F21EE80B6000A8AEB /* Local */,
 				88E5E9A521EE32B700BD6A24 /* AllTransactions */,
 				885997A721EBA510000B6A19 /* WhishList */,
 				8849FDDF21D3A33100008EF2 /* Model */,

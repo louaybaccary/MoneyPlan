@@ -91,7 +91,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             let alert = SCLAlertView()
             let txt = alert.addTextField("Enter the amount of money")
             alert.addButton("+") {
-                if ( (self.transactions[indexPath.item].trMoney) > (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)){
+                if ( (self.transactions[indexPath.item].trMoney) >= (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)){
                      SCLAlertView().showWarning("Warning", subTitle: "ok")
                     API.setMoney(money: "-"+txt.text!, userID: "1")
                     API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)), id: String(self.transactions[indexPath.row].id), userID: "1")
@@ -138,7 +138,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
                 SCLAlertView().showWarning("Warning", subTitle: "ok")
             
             API.setMoney(money: (txt.text!), userID: "1")
-            API.AddTarget(username: "1", name: "added", money: txt.text!, category: "Added", image: "no", type: "Added")
+            API.AddTarget(username: "1", name: "added", money: txt.text!, category: "added", image: "no", type: "added")
                 self.viewDidLoad()
           
             }
@@ -158,7 +158,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             SCLAlertView().showWarning("Warning", subTitle: "ok")
             
             API.setMoney(money: "-"+txt.text!, userID: "1")
-            API.AddTarget(username: "1", name: "added", money: txt.text!, category: "Added", image: "no", type: "Added")
+            API.AddTarget(username: "1", name: "deleted", money: txt.text!, category: "minus", image: "no", type: "minus")
             self.viewDidLoad()
             
         }

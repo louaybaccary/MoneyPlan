@@ -37,7 +37,7 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        API.getTransaction(username: "1",type : "wish") { (error :Error?, transactions : [Transaction]?) in
+        API.getWhatWhish(username: "1",type : "wish") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions
@@ -73,14 +73,5 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

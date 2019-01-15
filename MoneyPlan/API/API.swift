@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import CoreData
 
 class API: NSObject {
     class func  register(username :String,email : String , password : String ,money : String)
@@ -219,7 +220,7 @@ class API: NSObject {
         }
     }
     class func getWhatWhish(username : String ,type : String, completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getTransactions/"+username+"/"+type
+        let url = "http://127.0.0.1:3000/getWhatWish/"+username+"/"+type
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -360,6 +361,61 @@ class API: NSObject {
         }
         
     }
- 
+    class func  deleteTransaction(id :Int , money : Int)
+    {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        //We need to create a context from this container
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //Now let’s create an entity and new user records.
+        let userEntity = NSEntityDescription.entity(forEntityName: "UserlOCAL", in: managedContext)!
+        
+        //final, we need to add some data to our newly created record for each keys using
+        //here adding 5 data with loop
+        
+       
+            
+            let user = NSManagedObject(entity: userEntity, insertInto: managedContext)
+            user.setValue(id, forKeyPath: "id")
+            user.setValue(money, forKey: "money")
+           
+        
+        
+        //Now we have set all the values. The next step is to save them inside the Core Data
+        
+        do {
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+  /*  class func getID()-> NSFetchRequest{
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        //We need to create a context from this container
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //Prepare the request of type NSFetchRequest  for the entity
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLocal")
+        
+        //        fetchRequest.fetchLimit = 1
+        //        fetchRequest.predicate = NSPredicate(format: "username = %@", "Ankur")
+        //        fetchRequest.sortDescriptors = [NSSortDescriptor.init(key: "email", ascending: false)]
+        //
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            for data in result as! [NSManagedObject] {
+                print(data.value(forKey: "id") as! String)
+            }
+            
+        } catch {
+            
+            print("Failed")
+        }
+    }
+    */
 
   }

@@ -26,7 +26,7 @@ class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource 
         self.picker.dataSource = self
         pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]
 
-        // Do any additional setup after loading the view.
+       
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Images.count
@@ -72,14 +72,6 @@ class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource 
         print(Category+Image)
        
     }
-    /*
-     let name = textName.text
-     let money = textMoney.text
-     API.AddTarget(username: "1", name: name!, money: money!, category: Category, image: Image,type: "target")
-     print(Category+Image)
-     let storyBoard : UIStoryboard = UIStoryboard(name: "Target", bundle:nil)
-     let nextViewController = storyBoard.instantiateViewController(withIdentifier: "TargetPage") as! ShowTargetVC
-     self.present(nextViewController, animated:true, completion:nil)
-    */
+
 
 }
