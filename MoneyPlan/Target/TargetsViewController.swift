@@ -14,11 +14,11 @@ class TargetsViewController: UIViewController {
     @IBOutlet weak var current: UIView!
     @IBAction func switchViews(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1{
-            current.alpha = 0
-            finished.alpha = 1
-        } else {
             current.alpha = 1
             finished.alpha = 0
+        } else {
+            current.alpha = 0
+            finished.alpha = 1
         }
     }
     override func viewDidLoad() {
