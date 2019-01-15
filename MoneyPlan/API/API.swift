@@ -219,8 +219,8 @@ class API: NSObject {
             }
         }
     }
-    class func getWhatWhish(username : String ,type : String, completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getWhatWish/"+username+"/"+type
+    class func getWhatWhish(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
+        let url = "http://127.0.0.1:3000/getWhatWish/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :

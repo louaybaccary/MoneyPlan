@@ -14,7 +14,7 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        API.getCurrentTarget(username: "1") { (error :Error?, transactions : [Transaction]?) in
+        API.getTransaction(username: "1",type: "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions
@@ -56,20 +56,10 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
         }
-        let repeatction = UITableViewRowAction(style: .normal, title: "Repeat") { (UITableViewRowAction
-            , IndexPath) in
-            
-            API.AddTarget(username: "1", name: self.transactions[indexPath.item].name, money: String(self.transactions[indexPath.item].trMoney), category: self.transactions[indexPath.item].category, image: self.transactions[indexPath.item].image, type: "target")
-            API.deleteTransaction(id: String(self.transactions[indexPath.item].id))
-            self.tableView.beginUpdates()
-            // ** add below line. **
-            self.transactions.remove(at: IndexPath.row)
-            self.tableView.deleteRows(at: [IndexPath], with: .automatic)
-            self.tableView.endUpdates()
-        }
         
         
-        return [deletAction,repeatction]
+        
+        return [deletAction]
         
     }
 

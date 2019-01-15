@@ -37,7 +37,7 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        API.getWhatWhish(username: "1",type : "wish") { (error :Error?, transactions : [Transaction]?) in
+        API.getWhatWhish(username: "1") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions

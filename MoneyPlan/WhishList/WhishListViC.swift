@@ -14,9 +14,13 @@ class WhishListViC: UIViewController {
     @IBOutlet weak var whatView: UIView!
     @IBAction func switchViews(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
+            wishView.alpha = 1
+            whatView.alpha = 0
+        } else if  sender.selectedSegmentIndex == 1{
             wishView.alpha = 0
             whatView.alpha = 1
-        } else {
+        }
+        else {
             wishView.alpha = 1
             whatView.alpha = 0
         }
