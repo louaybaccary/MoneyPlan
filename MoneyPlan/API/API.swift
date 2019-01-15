@@ -252,7 +252,7 @@ class API: NSObject {
             }
         }
     }
-    /*class func getToday(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
+    class func getToday(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
         let url = "http://127.0.0.1:3000/getTodayTrans/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
@@ -360,6 +360,6 @@ class API: NSObject {
         }
         
     }
-    */
+ 
 
   }
