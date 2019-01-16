@@ -47,7 +47,7 @@ class TodayViewController: UIViewController ,UITableViewDataSource,UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        API.getToday(username: "1") { (error :Error?, transactions : [Transaction]?) in
+        API.getToday(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions

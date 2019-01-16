@@ -43,7 +43,7 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func btnAdd(_ sender: Any) {
         let name = textName.text
         let money = textMoney.text
-        API.AddTarget(username: "1", name: name!, money: money!, category: Category, image: Image,type: "target")
+        API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
         print(Category+Image)
        
     }

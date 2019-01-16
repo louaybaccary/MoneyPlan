@@ -15,7 +15,7 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        API.getCompletedTarget(username: "1") { (error :Error?, transactions : [Transaction]?) in
+        API.getCompletedTarget(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions
@@ -62,7 +62,7 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
         let repeatction = UITableViewRowAction(style: .normal, title: "Repeat") { (UITableViewRowAction
             , IndexPath) in
             
-            API.AddTarget(username: "1", name: self.transactions[indexPath.item].name, money: String(self.transactions[indexPath.item].trMoney), category: self.transactions[indexPath.item].category, image: self.transactions[indexPath.item].image, type: "target")
+            API.AddTarget(username: API.getID(), name: self.transactions[indexPath.item].name, money: String(self.transactions[indexPath.item].trMoney), category: self.transactions[indexPath.item].category, image: self.transactions[indexPath.item].image, type: "target")
             API.deleteTransaction(id: String(self.transactions[indexPath.item].id))
             self.tableView.beginUpdates()
             // ** add below line. **

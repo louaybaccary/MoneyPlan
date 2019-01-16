@@ -48,7 +48,7 @@ class WeekViewController: UIViewController ,UITableViewDataSource,UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        API.getWeek(username: "1") { (error :Error?, transactions : [Transaction]?) in
+        API.getWeek(username:API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions

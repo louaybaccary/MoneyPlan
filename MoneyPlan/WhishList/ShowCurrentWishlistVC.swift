@@ -35,7 +35,7 @@ class ShowCurrentWishlistVC:  UIViewController ,UITableViewDataSource,UITableVie
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        API.getTransaction(username: "1",type : "wish") { (error :Error?, transactions : [Transaction]?) in
+        API.getTransaction(username: API.getID(),type : "wish") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions

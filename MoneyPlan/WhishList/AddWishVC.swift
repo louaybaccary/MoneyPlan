@@ -68,7 +68,7 @@ class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource 
     @IBAction func AddBtn(_ sender: Any) {
         let name = nameLabel.text
         let money = moneyLabel.text
-        API.AddTarget(username: "1", name: name!, money: money!, category: Category, image: Image,type: "wish")
+        API.AddTarget(username:API.getID(), name: name!, money: money!, category: Category, image: Image,type: "wish")
         print(Category+Image)
        
     }

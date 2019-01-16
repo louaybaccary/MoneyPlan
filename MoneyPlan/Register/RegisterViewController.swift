@@ -17,22 +17,42 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var textPassword: UITextField!
     @IBOutlet weak var textMoney: UITextField!
     
-    
+    var myUser = [User]()
 
     @IBAction func btnValidate(_ sender: Any) {
-        //TODO
-        //Check unique username
-        //TODO
-        //Controle de saisie
-        
-       API.register(username: textUsername.text!, email: textEmail.text!, password: textPassword.text!, money: String(textMoney.text!))
+   
+        API.login(username: textUsername.text!, password: textPassword.text!) {
+            success in
+            if success{
+                 print("no")
+              
+            }
+            else{
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
+                nextViewController.currentUser = self.textUsername.text!
+                self.present(nextViewController, animated:true, completion:nil)
+                API.register(username: self.textUsername.text!, email: self.textEmail.text!, password: self.textPassword.text!, money: String(self.textMoney.text!))
+                API.getUser(username: self.textUsername.text!) { (error :Error?, myUser :[User]?) in
+                    if let myUser = myUser {
+                        self.myUser = myUser
+                        self.reloadInputViews()
+                        //  API.create(id: String(myUser[0].id), money: String(myUser[0].money), username: String(myUser[0].username))
+                        print("okok")
+                        
+                    }
+                }
+                
+            }
+            
+            
+        }
+     
        // print(textUsername.text!)
     }
     
 
-    @IBAction func btnBegin(_ sender: Any) {
-   
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
       

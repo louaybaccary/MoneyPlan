@@ -8,6 +8,7 @@
 
 import UIKit
 import SCLAlertView
+import CoreData
 class MainPageViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     var currentUser : String?
 
@@ -19,11 +20,12 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     
     var myUser = [User]()
     var transactions = [Transaction]()
+    
     let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
     override func viewDidLoad() {
         super.viewDidLoad()
      //   moneyLabel.text = "plzzzz"
-        API.getUser(username: "test") { (error :Error?, myUser :[User]?) in
+        API.getUser(username: API.getusername()) { (error :Error?, myUser :[User]?) in
             if let myUser = myUser {
                 self.myUser = myUser
                 self.reloadInputViews()
@@ -48,7 +50,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         
         }
      
-        API.getTransaction(username: "1",type : "target") { (error :Error?, transactions : [Transaction]?) in
+        API.getTransaction(username: API.getID(),type : "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 self.transactions = transactions
                 self.tableView.reloadData()
@@ -93,8 +95,8 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             alert.addButton("+") {
                 if ( (self.transactions[indexPath.item].trMoney) >= (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)){
                      SCLAlertView().showWarning("Warning", subTitle: "ok")
-                    API.setMoney(money: "-"+txt.text!, userID: "1")
-                    API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)), id: String(self.transactions[indexPath.row].id), userID: "1")
+                    API.setMoney(money: "-"+txt.text!, userID: API.getID())
+                    API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)), id: String(self.transactions[indexPath.row].id), userID:API.getID())
                     [Transaction]()
                     self.tableView.reloadData()
                     self.viewDidLoad()
@@ -116,7 +118,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
                 } else if ((txt.text!) == ""  || (Int(txt.text!) == 0) || ((txt.text!) == nil)) {
                     SCLAlertView().showWarning("Warning", subTitle: "ok")
                     API.setMoney(money: txt.text!, userID: "1")
-                    API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID: "1")
+                    API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID: API.getID())
                     [Transaction]()
                     self.tableView.reloadData()
                     self.viewDidLoad()
@@ -139,7 +141,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
                 SCLAlertView().showWarning("", subTitle: "ok")
             
             API.setMoney(money: (txt.text!), userID: "1")
-            API.AddTarget(username: "1", name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
+            API.AddTarget(username: API.getID(), name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
                 self.viewDidLoad()
           
             }
@@ -160,7 +162,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             SCLAlertView().showWarning("", subTitle: "ok")
             
             API.setMoney(money: "-"+txt.text!, userID: "1")
-            API.AddTarget(username: "1", name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
+            API.AddTarget(username: API.getID(), name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
             self.viewDidLoad()
             
         }

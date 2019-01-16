@@ -361,7 +361,7 @@ class API: NSObject {
         }
         
     }
-    class func  deleteTransaction(id :Int , money : Int)
+    class func  create(id :String , money : String , username : String)
     {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
@@ -369,7 +369,7 @@ class API: NSObject {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         //Now let’s create an entity and new user records.
-        let userEntity = NSEntityDescription.entity(forEntityName: "UserlOCAL", in: managedContext)!
+        let userEntity = NSEntityDescription.entity(forEntityName: "UserLocal", in: managedContext)!
         
         //final, we need to add some data to our newly created record for each keys using
         //here adding 5 data with loop
@@ -379,6 +379,7 @@ class API: NSObject {
             let user = NSManagedObject(entity: userEntity, insertInto: managedContext)
             user.setValue(id, forKeyPath: "id")
             user.setValue(money, forKey: "money")
+         user.setValue(username, forKey: "username")
            
         
         
@@ -392,7 +393,7 @@ class API: NSObject {
         }
         
     }
-  /*  class func getID()-> NSFetchRequest{
+    class func getIDa(){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         //We need to create a context from this container
@@ -416,6 +417,12 @@ class API: NSObject {
             print("Failed")
         }
     }
-    */
-
+    
+    class func getID()-> String {
+       
+        return "1"
   }
+    class func getusername()-> String {
+        return "test"
+    }
+}

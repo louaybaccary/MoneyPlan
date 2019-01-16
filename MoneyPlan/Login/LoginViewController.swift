@@ -12,7 +12,7 @@ import SCLAlertView
 class LoginViewController: UIViewController {
     @IBOutlet weak var textUsername: UITextField!
     @IBOutlet weak var textPassword: UITextField!
-    
+    var myUser = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,11 +30,24 @@ class LoginViewController: UIViewController {
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
                 nextViewController.currentUser = self.textUsername.text!
                 self.present(nextViewController, animated:true, completion:nil)
+                API.getUser(username: self.textUsername.text!) { (error :Error?, myUser :[User]?) in
+                    if let myUser = myUser {
+                        self.myUser = myUser
+                        self.reloadInputViews()
+                    //  API.create(id: String(myUser[0].id), money: String(myUser[0].money), username: String(myUser[0].username))
+                  print("okok")
+                      //  print(String(myUser[0].id))
+                          //  API.create(id: String(myUser[1].id), money: String(myUser[1].money), username: myUser[1].username)
+                        }
+                    }
+                    
+                }
+           else {
+                print("no")
             }
-            else{
-                SCLAlertView().showWarning("Warning", subTitle: "Wrong username or password")
+          
         }
 
 }
 }
-}
+

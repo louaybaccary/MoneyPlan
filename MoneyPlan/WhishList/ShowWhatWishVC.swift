@@ -36,7 +36,7 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        API.getWhatWhish(username: "1") { (error :Error?, transactions : [Transaction]?) in
+        API.getWhatWhish(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
 
                 self.transactions = transactions
@@ -49,7 +49,7 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
         
         let moveToTargetAction = UITableViewRowAction(style: .normal, title: "Move to target") { (UITableViewRowAction
             , IndexPath) in
-            API.moveToTarget(id: String(self.transactions[indexPath.item].id), userID: "1")
+            API.moveToTarget(id: String(self.transactions[indexPath.item].id), userID: API.getID())
             self.tableView.beginUpdates()
             // ** add below line. **
             self.transactions.remove(at: IndexPath.row)

@@ -14,7 +14,7 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        API.getTransaction(username: "1",type: "target") { (error :Error?, transactions : [Transaction]?) in
+        API.getTransaction(username: API.getID(),type: "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions
