@@ -12,8 +12,8 @@ import SCLAlertView
 class LoginViewController: UIViewController {
     @IBOutlet weak var textUsername: UITextField!
     @IBOutlet weak var textPassword: UITextField!
-    static var username = ""
-    static var id = ""
+   /* static var username = ""
+    static var id = ""*/
     var myUser = [User]()
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
@@ -29,19 +29,23 @@ class LoginViewController: UIViewController {
         API.login(username: textUsername.text!, password: textPassword.text!) {
             success in
             if success{
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+              /*  let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
-                nextViewController.currentUser = self.textUsername.text!
-                self.present(nextViewController, animated:true, completion:nil)
+                */
+             /*   let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
+                self.navigationController?.pushViewController(secondViewController, animated: true)*/
+               // nextViewController.currentUser = self.textUsername.text!
+              //  self.present(nextViewController, animated:true, completion:nil)
                 API.getUser(username: self.textUsername.text!) { (error :Error?, myUser :[User]?) in
                     if let myUser = myUser {
                         self.myUser = myUser
                         self.reloadInputViews()
                        
-                        print("hey")
+                   /*     print("hey")
                         print(myUser[0].username)
                         LoginViewController.username = myUser[0].username
-                        LoginViewController.id = String(myUser[0].id)
+                        LoginViewController.id = String(myUser[0].id)*/
+                        API.create(id: String(myUser[0].id), username: myUser[0].username)
                     //  API.create(id: String(myUser[0].id), money: String(myUser[0].money), username: String(myUser[0].username))
                 
                       //  print(String(myUser[0].id))

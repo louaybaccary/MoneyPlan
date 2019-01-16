@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-
+import CoreData
 
 class API: NSObject {
     class func  register(username :String,email : String , password : String ,money : String)
@@ -362,16 +362,68 @@ class API: NSObject {
    
         
     }
-   
+    class func create(id : String , username : String){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        //We need to create a context from this container
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        //Now let’s create an entity and new user records.
+        let userEntity = NSEntityDescription.entity(forEntityName: "LocalInfo", in: managedContext)!
+        let user = NSManagedObject(entity: userEntity, insertInto: managedContext)
+        user.setValue(id, forKey: "id")
+        user.setValue(username, forKey: "username")
+        
+    }
   
     
     class func getID()-> String {
         
-        return LoginViewController.id
-  }
+       // return LoginViewController.id
+      let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        //We need to create a context from this container
+        let managedContext = appDelegate!.persistentContainer.viewContext
+        
+        //Prepare the request of type NSFetchRequest  for the entity
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LocalInfo")
+        var id = ""
+        do {
+            let result = try managedContext.fetch(fetchRequest) 
+            for data in result as! [NSManagedObject] {
+                id = (data.value(forKey: "id") as! String)
+            }
+            
+        } catch {
+            
+            print("Failed")
+        }
+        print(id)
+          return id
+        
+         }
     class func getusername()-> String {
        
-        return LoginViewController.username
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        //We need to create a context from this container
+        let managedContext = appDelegate!.persistentContainer.viewContext
+        
+        //Prepare the request of type NSFetchRequest  for the entity
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LocalInfo")
+        var username = ""
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            for data in result as! [NSManagedObject] {
+                username = (data.value(forKey: "username") as! String)
+            }
+            
+        } catch {
+            
+            print("Failed")
+        }
+        print(username)
+        return username
     }
     
 }

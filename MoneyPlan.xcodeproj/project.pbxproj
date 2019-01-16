@@ -22,6 +22,7 @@
 		88614C6221D5715F00794276 /* AddTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6121D5715F00794276 /* AddTargetVC.swift */; };
 		88614C6421D6483500794276 /* ShowTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6321D6483500794276 /* ShowTargetVC.swift */; };
 		88614C6621D6483500794276 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C6521D6483500794276 /* Transaction.swift */; };
+		886D5BEA21F07F630033CBAB /* MoneyPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 886D5BE821F07F630033CBAB /* MoneyPlan.xcdatamodeld */; };
 		8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882FD1F21CCF03A009B132E /* RegisterViewController.swift */; };
 		8882FD2321CCF61B009B132E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882FD2221CCF61B009B132E /* API.swift */; };
 		8891819921EDDEC900594706 /* ShowCurrentWishlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8891819821EDDEC900594706 /* ShowCurrentWishlistVC.swift */; };
@@ -56,6 +57,7 @@
 		88614C6121D5715F00794276 /* AddTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTargetVC.swift; sourceTree = "<group>"; };
 		88614C6321D6483500794276 /* ShowTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTargetVC.swift; sourceTree = "<group>"; };
 		88614C6521D6483500794276 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		886D5BE921F07F630033CBAB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8882FD1F21CCF03A009B132E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8882FD2221CCF61B009B132E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8891819821EDDEC900594706 /* ShowCurrentWishlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCurrentWishlistVC.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		8853917521C3B1D70010BD24 = {
 			isa = PBXGroup;
 			children = (
+				886D5BE821F07F630033CBAB /* MoneyPlan.xcdatamodeld */,
 				8853918021C3B1D70010BD24 /* MoneyPlan */,
 				8853917F21C3B1D70010BD24 /* Products */,
 				969145B9D7E44D0FC11487AD /* Pods */,
@@ -374,6 +377,7 @@
 				8853918421C3B1D80010BD24 /* ViewController.swift in Sources */,
 				885997AF21ED02AE000B6A19 /* ShowCompletedTargetVC.swift in Sources */,
 				8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */,
+				886D5BEA21F07F630033CBAB /* MoneyPlan.xcdatamodeld in Sources */,
 				88E5E9A921EE35D900BD6A24 /* TodayViewController.swift in Sources */,
 				8853918221C3B1D80010BD24 /* AppDelegate.swift in Sources */,
 				885997AB21EBB544000B6A19 /* AddWishVC.swift in Sources */,
@@ -585,6 +589,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		886D5BE821F07F630033CBAB /* MoneyPlan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				886D5BE921F07F630033CBAB /* Model.xcdatamodel */,
+			);
+			currentVersion = 886D5BE921F07F630033CBAB /* Model.xcdatamodel */;
+			path = MoneyPlan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8853917621C3B1D70010BD24 /* Project object */;
 }
