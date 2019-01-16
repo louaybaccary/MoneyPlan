@@ -12,6 +12,8 @@ import CoreData
 class MainPageViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
     var currentUser : String?
 
+  //  lazy var username = ""
+  //  lazy var id = ""
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +25,9 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     
     let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+
+        print(LoginViewController.username)
         super.viewDidLoad()
      //   moneyLabel.text = "plzzzz"
         API.getUser(username: API.getusername()) { (error :Error?, myUser :[User]?) in
@@ -79,7 +84,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         name.text = transactions[indexPath.item].name
         var per = ((transactions[indexPath.item].currentMoney) * 100) /  (transactions[indexPath.item].trMoney)
        // currentMoney.setProgress(Float(per), animated: true)
-        currentMoney.setProgress(50, animated: true)
+        currentMoney.setProgress(Float(per), animated: false)
         money.text = String(transactions[indexPath.item].currentMoney)
         return cell!
     }
@@ -140,12 +145,12 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
       
                 SCLAlertView().showWarning("", subTitle: "ok")
             
-            API.setMoney(money: (txt.text!), userID: "1")
+            API.setMoney(money: (txt.text!), userID: API.getID())
             API.AddTarget(username: API.getID(), name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
                 self.viewDidLoad()
           
             }
-            alert.showEdit("Thank you", subTitle: "")
+            alert.showEdit("Enter the amount of money and a name", subTitle: "")
             }
 
   
@@ -161,12 +166,12 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             
             SCLAlertView().showWarning("", subTitle: "ok")
             
-            API.setMoney(money: "-"+txt.text!, userID: "1")
+            API.setMoney(money: "-"+txt.text!, userID: API.getID())
             API.AddTarget(username: API.getID(), name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
             self.viewDidLoad()
             
         }
-        alert.showEdit("Thank you", subTitle: "")
+        alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
     }
 

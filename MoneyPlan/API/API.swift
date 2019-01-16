@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-import CoreData
+
 
 class API: NSObject {
     class func  register(username :String,email : String , password : String ,money : String)
@@ -359,70 +359,19 @@ class API: NSObject {
                 completion(nil,transactions)
             }
         }
+   
         
     }
-    class func  create(id :String , money : String , username : String)
-    {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
-        //We need to create a context from this container
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        //Now let’s create an entity and new user records.
-        let userEntity = NSEntityDescription.entity(forEntityName: "UserLocal", in: managedContext)!
-        
-        //final, we need to add some data to our newly created record for each keys using
-        //here adding 5 data with loop
-        
-       
-            
-            let user = NSManagedObject(entity: userEntity, insertInto: managedContext)
-            user.setValue(id, forKeyPath: "id")
-            user.setValue(money, forKey: "money")
-         user.setValue(username, forKey: "username")
-           
-        
-        
-        //Now we have set all the values. The next step is to save them inside the Core Data
-        
-        do {
-            try managedContext.save()
-            
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-        
-    }
-    class func getIDa(){
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
-        //We need to create a context from this container
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        //Prepare the request of type NSFetchRequest  for the entity
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLocal")
-        
-        //        fetchRequest.fetchLimit = 1
-        //        fetchRequest.predicate = NSPredicate(format: "username = %@", "Ankur")
-        //        fetchRequest.sortDescriptors = [NSSortDescriptor.init(key: "email", ascending: false)]
-        //
-        do {
-            let result = try managedContext.fetch(fetchRequest)
-            for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "id") as! String)
-            }
-            
-        } catch {
-            
-            print("Failed")
-        }
-    }
+   
+  
     
     class func getID()-> String {
-       
-        return "1"
+        
+        return LoginViewController.id
   }
     class func getusername()-> String {
-        return "test"
+       
+        return LoginViewController.username
     }
+    
 }

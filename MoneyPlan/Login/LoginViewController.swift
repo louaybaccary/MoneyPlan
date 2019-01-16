@@ -12,8 +12,11 @@ import SCLAlertView
 class LoginViewController: UIViewController {
     @IBOutlet weak var textUsername: UITextField!
     @IBOutlet weak var textPassword: UITextField!
+    static var username = ""
+    static var id = ""
     var myUser = [User]()
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -34,16 +37,23 @@ class LoginViewController: UIViewController {
                     if let myUser = myUser {
                         self.myUser = myUser
                         self.reloadInputViews()
+                       
+                        print("hey")
+                        print(myUser[0].username)
+                        LoginViewController.username = myUser[0].username
+                        LoginViewController.id = String(myUser[0].id)
                     //  API.create(id: String(myUser[0].id), money: String(myUser[0].money), username: String(myUser[0].username))
-                  print("okok")
+                
                       //  print(String(myUser[0].id))
-                          //  API.create(id: String(myUser[1].id), money: String(myUser[1].money), username: myUser[1].username)
+                         // API.create()
+                        
                         }
                     }
                     
                 }
            else {
                 print("no")
+               SCLAlertView().showInfo("Wrong Credentials", subTitle: "Please type again")
             }
           
         }

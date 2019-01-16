@@ -50,6 +50,8 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
         let moveToTargetAction = UITableViewRowAction(style: .normal, title: "Move to target") { (UITableViewRowAction
             , IndexPath) in
             API.moveToTarget(id: String(self.transactions[indexPath.item].id), userID: API.getID())
+            print(String(self.transactions[indexPath.item].id))
+            print(API.getID())
             self.tableView.beginUpdates()
             // ** add below line. **
             self.transactions.remove(at: IndexPath.row)

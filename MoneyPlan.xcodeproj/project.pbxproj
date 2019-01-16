@@ -11,7 +11,6 @@
 		8853918221C3B1D80010BD24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853918121C3B1D80010BD24 /* AppDelegate.swift */; };
 		8853918421C3B1D80010BD24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853918321C3B1D80010BD24 /* ViewController.swift */; };
 		8853918721C3B1D80010BD24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8853918521C3B1D80010BD24 /* Main.storyboard */; };
-		8853918A21C3B1D80010BD24 /* MoneyPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8853918821C3B1D80010BD24 /* MoneyPlan.xcdatamodeld */; };
 		8853918C21C3B1EB0010BD24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8853918B21C3B1EB0010BD24 /* Assets.xcassets */; };
 		8853918F21C3B1EB0010BD24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8853918D21C3B1EB0010BD24 /* LaunchScreen.storyboard */; };
 		8857422721D10B530065792D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857422621D10B530065792D /* MainPageViewController.swift */; };
@@ -45,7 +44,6 @@
 		8853918121C3B1D80010BD24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8853918321C3B1D80010BD24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8853918621C3B1D80010BD24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8853918921C3B1D80010BD24 /* MoneyPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoneyPlan.xcdatamodel; sourceTree = "<group>"; };
 		8853918B21C3B1EB0010BD24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8853918E21C3B1EB0010BD24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8853919021C3B1EB0010BD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				8853918B21C3B1EB0010BD24 /* Assets.xcassets */,
 				8853918D21C3B1EB0010BD24 /* LaunchScreen.storyboard */,
 				8853919021C3B1EB0010BD24 /* Info.plist */,
-				8853918821C3B1D80010BD24 /* MoneyPlan.xcdatamodeld */,
 			);
 			path = MoneyPlan;
 			sourceTree = "<group>";
@@ -378,7 +375,6 @@
 				885997AF21ED02AE000B6A19 /* ShowCompletedTargetVC.swift in Sources */,
 				8882FD2021CCF03A009B132E /* RegisterViewController.swift in Sources */,
 				88E5E9A921EE35D900BD6A24 /* TodayViewController.swift in Sources */,
-				8853918A21C3B1D80010BD24 /* MoneyPlan.xcdatamodeld in Sources */,
 				8853918221C3B1D80010BD24 /* AppDelegate.swift in Sources */,
 				885997AB21EBB544000B6A19 /* AddWishVC.swift in Sources */,
 				8882FD2321CCF61B009B132E /* API.swift in Sources */,
@@ -589,19 +585,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		8853918821C3B1D80010BD24 /* MoneyPlan.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8853918921C3B1D80010BD24 /* MoneyPlan.xcdatamodel */,
-			);
-			currentVersion = 8853918921C3B1D80010BD24 /* MoneyPlan.xcdatamodel */;
-			path = MoneyPlan.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8853917621C3B1D70010BD24 /* Project object */;
 }

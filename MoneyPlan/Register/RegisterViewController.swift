@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+import SCLAlertView
 class RegisterViewController: UIViewController {
 
    
@@ -25,7 +25,7 @@ class RegisterViewController: UIViewController {
             success in
             if success{
                  print("no")
-              
+              SCLAlertView().showInfo("Wrong Credentials", subTitle: "Please type again")
             }
             else{
                 let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -54,6 +54,7 @@ class RegisterViewController: UIViewController {
 
 
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
       
         
