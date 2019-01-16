@@ -133,16 +133,17 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
   
         let alert = SCLAlertView()
         let txt = alert.addTextField("Enter the amount of money")
+        let name = alert.addTextField("Enter a name")
         alert.addButton("+") {
       
-                SCLAlertView().showWarning("Warning", subTitle: "ok")
+                SCLAlertView().showWarning("", subTitle: "ok")
             
             API.setMoney(money: (txt.text!), userID: "1")
-            API.AddTarget(username: "1", name: "added", money: txt.text!, category: "added", image: "no", type: "added")
+            API.AddTarget(username: "1", name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
                 self.viewDidLoad()
           
             }
-            alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+            alert.showEdit("Thank you", subTitle: "")
             }
 
   
@@ -153,16 +154,17 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     @IBAction func minusTransactionBtn(_ sender: Any) {
         let alert = SCLAlertView()
         let txt = alert.addTextField("Enter the amount of money")
+        let name = alert.addTextField("Enter a name")
         alert.addButton("-") {
             
-            SCLAlertView().showWarning("Warning", subTitle: "ok")
+            SCLAlertView().showWarning("", subTitle: "ok")
             
             API.setMoney(money: "-"+txt.text!, userID: "1")
-            API.AddTarget(username: "1", name: "deleted", money: txt.text!, category: "minus", image: "no", type: "minus")
+            API.AddTarget(username: "1", name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
             self.viewDidLoad()
             
         }
-        alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+        alert.showEdit("Thank you", subTitle: "")
     }
     }
 
