@@ -9,7 +9,7 @@
 import UIKit
 
 class Controller: UIViewController {
-
+    
     @IBOutlet weak var month: UIView!
     @IBOutlet weak var week: UIView!
     @IBOutlet weak var today: UIView!
@@ -32,7 +32,7 @@ class Controller: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         // Do any additional setup after loading the view.
     }
     

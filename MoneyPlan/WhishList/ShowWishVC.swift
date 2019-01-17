@@ -36,6 +36,7 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
         API.getWhatWhish(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {

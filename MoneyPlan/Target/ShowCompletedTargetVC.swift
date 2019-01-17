@@ -15,6 +15,7 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         API.getCompletedTarget(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 

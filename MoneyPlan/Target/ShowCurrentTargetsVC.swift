@@ -14,6 +14,7 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         API.getTransaction(username: API.getID(),type: "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 

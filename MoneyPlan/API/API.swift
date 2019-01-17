@@ -27,7 +27,7 @@ class API: NSObject {
             
                 completion(false)
             case .success:
-                print(response.value)
+            //    print(response.value)
                 if (response.value as? NSDictionary) != nil {
                           let dict = response.value as? NSDictionary
                         let user = dict!["users"] as? NSArray
@@ -58,10 +58,10 @@ class API: NSObject {
                 switch response.result {
                 case .failure(let error) :
                     completion(error,nil)
-                    print(error)
+                   // print(error)
                 case .success(let value) :
                     let json = JSON(value)
-                    print(json)
+                  //  print(json)
                     guard let dataArr = json["user"].array else {
                         completion(nil,nil)
                         return
@@ -97,10 +97,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+              //  print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+              //  print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -113,7 +113,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+                 //   print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -157,10 +157,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+              //  print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+               // print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -173,7 +173,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+                  //  print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -191,10 +191,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+               // print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+             //   print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -207,7 +207,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+                 //   print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -225,10 +225,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+               // print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+               // print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -241,7 +241,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+                   // print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -259,10 +259,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+                //print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+               // print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -275,7 +275,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+               //     print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -295,10 +295,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+               // print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+              //  print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -311,7 +311,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+                 //   print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -331,10 +331,10 @@ class API: NSObject {
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
-                print(error)
+              //  print(error)
             case .success(let value) :
                 let json = JSON(value)
-                print(json)
+            //    print(json)
                 guard let dataArr = json["transactions"].array else {
                     completion(nil,nil)
                     return
@@ -347,7 +347,7 @@ class API: NSObject {
                     let transaction = Transaction()
                     transaction.id = data["id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
-                    print(transaction.name)
+               //     print(transaction.name)
                     transaction.image = data["image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
@@ -396,9 +396,9 @@ class API: NSObject {
             
         } catch {
             
-            print("Failed")
+           // print("Failed")
         }
-        print(id)
+       // print(id)
           return id
         
          }
@@ -420,9 +420,9 @@ class API: NSObject {
             
         } catch {
             
-            print("Failed")
+         //   print("Failed")
         }
-        print(username)
+       // print(username)
         return username
     }
     

@@ -48,6 +48,7 @@ class WeekViewController: UIViewController ,UITableViewDataSource,UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         API.getWeek(username:API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 

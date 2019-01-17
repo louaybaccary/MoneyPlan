@@ -51,7 +51,7 @@ return [deletAction]
 
 }
     override func viewDidLoad() {
-        
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
      
         API.getTransaction(username: API.getID(),type : "target") { (error :Error?, transactions : [Transaction]?) in
