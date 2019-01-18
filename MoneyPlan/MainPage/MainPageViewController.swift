@@ -27,7 +27,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         print(API.getusername())
         print(API.getID())
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "mainPhoto")!)
         API.getUser(username: username) { (error :Error?, myUser :[User]?) in
             if let myUser = myUser {
                 self.myUser = myUser
@@ -124,29 +124,15 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         
     }
   
-    @IBAction func addTransactionBtn(_ sender: Any) {
   
-        let alert = SCLAlertView()
-        let txt = alert.addTextField("Enter the amount of money")
-        let name = alert.addTextField("Enter a name")
-        alert.addButton("+") {
-      
-                SCLAlertView().showWarning("", subTitle: "ok")
-            
-            API.setMoney(money: (txt.text!), userID: API.getID())
-            API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
-                self.viewDidLoad()
-          
-            }
-            alert.showEdit("Enter the amount of money and a name", subTitle: "")
-            }
 
   
             
     
         
     
-    @IBAction func minusTransactionBtn(_ sender: Any) {
+    
+    @IBAction func minus(_ sender: Any) {
         let alert = SCLAlertView()
         let txt = alert.addTextField("Enter the amount of money")
         let name = alert.addTextField("Enter a name")
@@ -161,6 +147,23 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         }
         alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
+   
+    
+    @IBAction func add(_ sender: Any) {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField("Enter the amount of money")
+        let name = alert.addTextField("Enter a name")
+        alert.addButton("+") {
+            
+            SCLAlertView().showWarning("", subTitle: "ok")
+            
+            API.setMoney(money: (txt.text!), userID: API.getID())
+            API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
+            self.viewDidLoad()
+            
+        }
+        alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
+}
 
 
