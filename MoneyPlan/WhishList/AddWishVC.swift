@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource , UICollectionViewDataSource, UICollectionViewDelegate{
     var pickerData: [String] = [String]()
@@ -69,10 +70,24 @@ class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource 
     @IBAction func AddBtn(_ sender: Any) {
         let name = nameLabel.text
         let money = moneyLabel.text
-        API.AddTarget(username:API.getID(), name: name!, money: money!, category: Category, image: Image,type: "wish")
-        print(Category+Image)
+        if (self.isStringAnInt(string : money!)){
+            API.AddTarget(username:API.getID(), name: name!, money: money!, category: Category, image: Image,type: "wish")
+            print(Category+Image)
+        }
+        else {
+            self.digitAlert()
+        }
+        
        
     }
 
-
+   
+    func isStringAnInt(string: String) -> Bool {
+        return Int(string) != nil
+    }
+ 
+    func digitAlert(){
+        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
+        
+    }
 }

@@ -32,7 +32,15 @@ class RegisterViewController: UIViewController {
                 let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
                
                 self.present(nextViewController, animated:true, completion:nil)
-                API.register(username: self.textUsername.text!, email: self.textEmail.text!, password: self.textPassword.text!, money: String(self.textMoney.text!))
+                if self.isStringAnInt(string: self.textMoney.text!){
+                    if self.isValidEmail(testStr : self.textEmail.text!){
+                      API.register(username: self.textUsername.text!, email: self.textEmail.text!, password: self.textPassword.text!, money: String(self.textMoney.text!))
+                }else {
+                    self.emailAlert()
+                }
+                }else {
+                    self.digitAlert()
+                }
                 API.getUser(username: self.textUsername.text!) { (error :Error?, myUser :[User]?) in
                     if let myUser = myUser {
                         self.myUser = myUser
@@ -60,5 +68,21 @@ class RegisterViewController: UIViewController {
         
     
     }
-
+    func isValidEmail(testStr:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: testStr)
+    }
+    func isStringAnInt(string: String) -> Bool {
+        return Int(string) != nil
+    }
+    func emailAlert(){
+        SCLAlertView().showInfo("Wrong email pattern", subTitle: "Please type again")
+        
+    }
+    func digitAlert(){
+        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
+        
+    }
 }

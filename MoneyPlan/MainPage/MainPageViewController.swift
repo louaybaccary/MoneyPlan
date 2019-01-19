@@ -85,9 +85,11 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             let alert = SCLAlertView()
             let txt = alert.addTextField("Enter the amount of money")
             alert.addButton("+") {
-               // let guard  
+               // let guard
+                  //TODO : text = int
+                 if self.isStringAnInt(string: txt.text!) == true {
                 if (  (self.transactions[indexPath.item].trMoney) >= (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)){
-                     SCLAlertView().showWarning("Warning", subTitle: "ok")
+                      SCLAlertView().showSuccess("OK", subTitle: "")
                     API.setMoney(money: "-"+txt.text!, userID: API.getID())
                     API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)), id: String(self.transactions[indexPath.row].id), userID:self.id)
                   //  [Transaction]()
@@ -96,7 +98,10 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
                 } else if ((txt.text!) == ""  || (Int(txt.text!) == 0)) {
                           SCLAlertView().showWarning("Warning", subTitle: "You can't add this amount")
                 }
-                
+                else {
+                    self.digitAlert()
+                    }
+                 }
             }
             alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
         }
@@ -104,49 +109,32 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             , IndexPath) in
             let alert = SCLAlertView()
             let txt = alert.addTextField("Enter the amount of money")
+            //TODO : text = int
             alert.addButton("-") {
-              
+               if self.isStringAnInt(string: txt.text!) == true {
                 if ( (Int(txt.text!)!)  > self.transactions[indexPath.item].currentMoney){
                       SCLAlertView().showWarning("Warning", subTitle: "You can't")
                 } else if ((txt.text!) == ""  || (Int(txt.text!) == 0)) {
-                    SCLAlertView().showWarning("Warning", subTitle: "ok")
+                    SCLAlertView().showSuccess("OK", subTitle: "")
                     API.setMoney(money: txt.text!, userID: "1")
                     API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID: self.id)
                  //   [Transaction]()
                     self.tableView.reloadData()
                     self.viewDidLoad()
+                }  else {
+                    self.digitAlert()
                 }
             }
+                
             alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
         }
-        
+        }
         return [plusAction,minusAction]
         
     }
   
   
 
-  
-            
-    
-        
-    
-    
-    @IBAction func minus(_ sender: Any) {
-        let alert = SCLAlertView()
-        let txt = alert.addTextField("Enter the amount of money")
-        let name = alert.addTextField("Enter a name")
-        alert.addButton("-") {
-            
-            SCLAlertView().showWarning("", subTitle: "ok")
-            
-            API.setMoney(money: "-"+txt.text!, userID: API.getID())
-            API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
-            self.viewDidLoad()
-            
-        }
-        alert.showEdit("Enter the amount of money and a name", subTitle: "")
-    }
    
     
     @IBAction func add(_ sender: Any) {
@@ -155,14 +143,48 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         let name = alert.addTextField("Enter a name")
         alert.addButton("+") {
             
-            SCLAlertView().showWarning("", subTitle: "ok")
-            
+            if self.isStringAnInt(string: txt.text!) == true {
+                
+            SCLAlertView().showSuccess("You did it", subTitle: "added successfully")
             API.setMoney(money: (txt.text!), userID: API.getID())
             API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
             self.viewDidLoad()
             
+            }
+            else {
+                self.digitAlert()
         }
         alert.showEdit("Enter the amount of money and a name", subTitle: "")
+    }
+         }
+    @IBAction func min(_ sender: Any) {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField("Enter the amount of money")
+        let name = alert.addTextField("Enter a name")
+        alert.addButton("-") {
+             //Todo txt = int
+             if self.isStringAnInt(string: txt.text!) == true {
+           SCLAlertView().showSuccess("You did it", subTitle: "added successfully")
+            
+            API.setMoney(money: "-"+txt.text!, userID: API.getID())
+            API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
+            self.viewDidLoad()
+             }
+             else {
+                self.digitAlert()
+            }
+            
+        }
+        alert.showEdit("Enter the amount of money and a name", subTitle: "")
+    }
+
+    func isStringAnInt(string: String) -> Bool {
+        return Int(string) != nil
+    }
+ 
+   func digitAlert(){
+        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
+        
     }
 }
 

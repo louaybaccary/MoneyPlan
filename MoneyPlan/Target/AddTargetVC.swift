@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource , UICollectionViewDataSource, UICollectionViewDelegate{
 
     var Category = ""
@@ -44,8 +44,13 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func btnAdd(_ sender: Any) {
         let name = textName.text
         let money = textMoney.text
-        API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
-        print(Category+Image)
+        if self.isStringAnInt(string : money!){
+            API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
+            print(Category+Image)
+        }
+        else {
+            self.digitAlert()
+        }
        
     }
     @IBOutlet weak var collectionView: UICollectionView!
@@ -70,5 +75,14 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+  
+    func isStringAnInt(string: String) -> Bool {
+        return Int(string) != nil
+    }
+   
+    func digitAlert(){
+        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
+        
     }
 }
