@@ -25,7 +25,7 @@ class TodayViewController: UIViewController ,UITableViewDataSource,UITableViewDe
         let contentView = cell?.viewWithTag(0)
         let image = contentView?.viewWithTag(1) as! UIImageView
         let name = cell!.viewWithTag(2) as! UILabel
-//      let money = cell!.viewWithTag(3) as! UILabel
+        let money = cell!.viewWithTag(3) as! UILabel
         switch transactions[indexPath.item].type {
         case "target":
             image.image = UIImage (named: "target")
@@ -41,13 +41,13 @@ class TodayViewController: UIViewController ,UITableViewDataSource,UITableViewDe
         
         name.text = transactions[indexPath.item].name
         print(transactions[indexPath.item].name)
-    //   money.text = String(transactions[indexPath.item].trMoney)
+        money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
     override func viewDidLoad() {
         super.viewDidLoad()
       
-          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+      //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
         API.getToday(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 

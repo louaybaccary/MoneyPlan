@@ -15,7 +15,7 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
-          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+     //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
         API.getWhatWhish(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 

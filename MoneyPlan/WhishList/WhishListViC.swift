@@ -27,7 +27,7 @@ class WhishListViC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
         
         // Do any additional setup after loading the view.
     }

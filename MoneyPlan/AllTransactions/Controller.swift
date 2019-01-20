@@ -24,15 +24,22 @@ class Controller: UIViewController {
             week.alpha = 1
             month.alpha = 0
         }
-        else {
+        else  if sender.selectedSegmentIndex == 2{
             today.alpha = 0
             week.alpha = 0
             month.alpha = 1
         }
+        else {
+            today.alpha = 1
+            week.alpha = 0
+            month.alpha = 0
+            
+        }
     }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
         // Do any additional setup after loading the view.
     }
     

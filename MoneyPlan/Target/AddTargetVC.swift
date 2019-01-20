@@ -13,8 +13,9 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var Category = ""
     var Image = ""
     override func viewDidLoad() {
-          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+       //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
+          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
         self.picker.delegate = self
         self.picker.dataSource = self
         pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]

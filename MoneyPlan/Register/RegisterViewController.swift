@@ -28,13 +28,27 @@ class RegisterViewController: UIViewController {
               SCLAlertView().showInfo("Wrong Credentials", subTitle: "Please type again")
             }
             else{
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
-               
-                self.present(nextViewController, animated:true, completion:nil)
+                
                 if self.isStringAnInt(string: self.textMoney.text!){
                     if self.isValidEmail(testStr : self.textEmail.text!){
                       API.register(username: self.textUsername.text!, email: self.textEmail.text!, password: self.textPassword.text!, money: String(self.textMoney.text!))
+                        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainPageViewController
+                      
+                        //    self.show(nextViewController, sender: Any?.self)
+                        self.present(nextViewController, animated:true, completion:nil)
+                  
+                        
+                        API.getUser(username: self.textUsername.text!) { (error :Error?, myUser :[User]?) in
+                            if let myUser = myUser {
+                                self.myUser = myUser
+                                self.reloadInputViews()
+                                
+                                API.create(id: String(myUser[0].id), username: myUser[0].username)
+                                
+                                
+                            }
+                        }
                 }else {
                     self.emailAlert()
                 }
@@ -62,10 +76,10 @@ class RegisterViewController: UIViewController {
 
 
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+      //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
       
-        
+         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "back")!)
     
     }
     func isValidEmail(testStr:String) -> Bool {

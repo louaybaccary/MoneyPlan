@@ -35,7 +35,7 @@ class ShowCurrentWishlistVC:  UIViewController ,UITableViewDataSource,UITableVie
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+      //     self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
         API.getTransaction(username: API.getID(),type : "wish") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 

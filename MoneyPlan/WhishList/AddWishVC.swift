@@ -23,7 +23,8 @@ class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource 
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
         self.picker.delegate = self
         self.picker.dataSource = self
         pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]

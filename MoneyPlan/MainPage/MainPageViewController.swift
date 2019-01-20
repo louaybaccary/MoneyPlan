@@ -17,6 +17,12 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     
     @IBOutlet weak var moneyLabel: UILabel!
    
+    @IBAction func deconnexion(_ sender: Any) {
+      /*  let storyBoard : UIStoryboard = UIStoryboard(name: "LoginPage", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Login") as! LoginViewController
+        
+        self.present(nextViewController, animated:true, completion:nil)*/
+    }
     var username = API.getusername()
     var id = API.getID()
     var myUser = [User]()
