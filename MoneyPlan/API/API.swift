@@ -10,16 +10,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import CoreData
-
+let myIp = "192.168.59.129"
 class API: NSObject {
+   
     class func  register(username :String,email : String , password : String ,money : String)
     {
-        let url = "http://127.0.0.1:3000/register/"+username+"/"+email+"/"+password+"/"+money
+        let url = "http://"+myIp+":3000/register/"+username+"/"+email+"/"+password+"/"+money
      Alamofire.request(url)
     
 }
     class func login(username : String , password : String, _ completion: @escaping (Bool) -> ()) {
-        let url = "http://127.0.0.1:3000/login/"+username+"/"+password
+        let url = "http://"+myIp+":3000/login/"+username+"/"+password
         Alamofire.request(url).responseJSON{response in
             switch response.result
             {
@@ -53,7 +54,7 @@ class API: NSObject {
     }
     class func getUser(username : String , completion :@escaping(_ error :Error?,_ userdata : [User]?)-> Void)
         {
-    let url = "http://127.0.0.1:3000/getUser/"+username
+    let url = "http://"+myIp+":3000/getUser/"+username
             Alamofire.request(url).responseJSON {response in
                 switch response.result {
                 case .failure(let error) :
@@ -87,12 +88,12 @@ class API: NSObject {
         }
     class func  AddTarget(username :String,name : String , money : String ,category : String,image : String,type :String)
     {
-        let url = "http://127.0.0.1:3000/Insert/"+name+"/"+image+"/"+type+"/"+category+"/"+money+"/"+username
+        let url = "http://"+myIp+":3000/Insert/"+name+"/"+image+"/"+type+"/"+category+"/"+money+"/"+username
         Alamofire.request(url)
        
     }
     class func getTransaction(username : String ,type : String, completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getTransactions/"+username+"/"+type
+        let url = "http://"+myIp+":3000/getTransactions/"+username+"/"+type
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -127,32 +128,32 @@ class API: NSObject {
     }
     class func  deleteTransaction(id :String)
     {
-        let url = "http://127.0.0.1:3000/Delete/"+id
+        let url = "http://"+myIp+":3000/Delete/"+id
         Alamofire.request(url)
         
     }
     class func  setCurrentMoney(money :String,id : String , userID : String)
     {
-        let url = "http://127.0.0.1:3000/setCurrentMoney/"+money+"/"+id+"/"+userID
+        let url = "http://"+myIp+":3000/setCurrentMoney/"+money+"/"+id+"/"+userID
         Alamofire.request(url)
         
     }
    
     class func  setMoney(money :String, userID : String)
     {
-        let url = "http://127.0.0.1:3000/setMoney/"+money+"/"+userID
+        let url = "http://"+myIp+":3000/setMoney/"+money+"/"+userID
         Alamofire.request(url)
         
     }
     ///Updatetype/32/1
     class func  moveToTarget(id :String, userID : String)
     {
-        let url = "http://127.0.0.1:3000/Updatetype/"+id+"/"+userID
+        let url = "http://"+myIp+":3000/Updatetype/"+id+"/"+userID
         Alamofire.request(url)
         
     }
     class func getCurrentTarget(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getCurentTargets/"+username
+        let url = "http://"+myIp+":3000/getCurentTargets/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -186,7 +187,7 @@ class API: NSObject {
         }
     }
     class func getCompletedTarget(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getCompletedTargets/"+username
+        let url = "http://"+myIp+":3000/getCompletedTargets/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -220,7 +221,7 @@ class API: NSObject {
         }
     }
     class func getWhatWhish(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getWhatWish/"+username
+        let url = "http://"+myIp+":3000/getWhatWish/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -254,7 +255,7 @@ class API: NSObject {
         }
     }
     class func getToday(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getTodayTrans/"+username
+        let url = "http://"+myIp+":3000/getTodayTrans/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -290,7 +291,7 @@ class API: NSObject {
    
         }
     class func getWeek(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getWeekTrans/"+username
+        let url = "http://"+myIp+":3000/getWeekTrans/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -326,7 +327,7 @@ class API: NSObject {
         
     }
     class func getMonth(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
-        let url = "http://127.0.0.1:3000/getMonthTrans/"+username
+        let url = "http://"+myIp+":3000/getMonthTrans/"+username
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :

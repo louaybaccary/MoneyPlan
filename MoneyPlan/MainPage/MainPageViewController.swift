@@ -143,26 +143,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
 
    
     
-    @IBAction func add(_ sender: Any) {
-        let alert = SCLAlertView()
-        let txt = alert.addTextField("Enter the amount of money")
-        let name = alert.addTextField("Enter a name")
-        alert.addButton("+") {
-            
-            if self.isStringAnInt(string: txt.text!) == true {
-                
-            SCLAlertView().showSuccess("You did it", subTitle: "added successfully")
-            API.setMoney(money: (txt.text!), userID: API.getID())
-            API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
-            self.viewDidLoad()
-            
-            }
-            else {
-                self.digitAlert()
-        }
-        alert.showEdit("Enter the amount of money and a name", subTitle: "")
-    }
-         }
+ 
     @IBAction func min(_ sender: Any) {
         let alert = SCLAlertView()
         let txt = alert.addTextField("Enter the amount of money")
@@ -184,6 +165,7 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
 
+   
     func isStringAnInt(string: String) -> Bool {
         return Int(string) != nil
     }
@@ -191,6 +173,27 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
    func digitAlert(){
         SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
         
+    }
+    
+    @IBAction func plusBtn(_ sender: Any) {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField("Enter the amount of money")
+        let name = alert.addTextField("Enter a name")
+        alert.addButton("+") {
+            //Todo txt = int
+            if self.isStringAnInt(string: txt.text!) == true {
+                SCLAlertView().showSuccess("You did it", subTitle: "added successfully")
+                
+                API.setMoney(money: txt.text!, userID: API.getID())
+                API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
+                self.viewDidLoad()
+            }
+            else {
+                self.digitAlert()
+            }
+            
+        }
+        alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
 }
 
