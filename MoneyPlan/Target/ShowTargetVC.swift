@@ -45,6 +45,14 @@ class ShowTargetVC: UIViewController , UITableViewDataSource,UITableViewDelegate
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
         }
  
 return [deletAction]

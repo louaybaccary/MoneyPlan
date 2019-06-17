@@ -67,7 +67,14 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
             self.tableView.endUpdates()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
             self.fetchData3()
-
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
         }
         
         

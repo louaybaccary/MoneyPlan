@@ -77,6 +77,8 @@ class AddWishVC: UIViewController ,UIPickerViewDelegate, UIPickerViewDataSource 
             API.AddTarget(username:API.getID(), name: name!, money: money!, category: Category, image: Image,type: "wish")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)

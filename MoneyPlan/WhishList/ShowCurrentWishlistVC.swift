@@ -56,6 +56,14 @@ class ShowCurrentWishlistVC:  UIViewController ,UITableViewDataSource,UITableVie
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
 
             self.fetchData()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
         }
         
         return [deleteActionAction]

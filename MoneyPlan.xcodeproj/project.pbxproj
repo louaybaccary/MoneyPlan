@@ -163,7 +163,6 @@
 				880B6D3421D2446F00A649DE /* Icons */,
 				880B6D3321D23E5C00A649DE /* Target */,
 				8857422521D10B320065792D /* MainPage */,
-				8857422121D1061A0065792D /* Ressources */,
 				88EAD8C521CF995A0086FF19 /* Login */,
 				8882FD2121CCF5CB009B132E /* API */,
 				8853919621C3C1B40010BD24 /* Register */,
@@ -183,13 +182,6 @@
 				8882FD1F21CCF03A009B132E /* RegisterViewController.swift */,
 			);
 			path = Register;
-			sourceTree = "<group>";
-		};
-		8857422121D1061A0065792D /* Ressources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Ressources;
 			sourceTree = "<group>";
 		};
 		8857422521D10B320065792D /* MainPage */ = {

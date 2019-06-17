@@ -48,11 +48,14 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
        self.showSpinner(onView: self.view)
         if self.isStringAnInt(string : money!){
             API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
             
             //print("hhhhhhhhhhhhh : " + Category+Image)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
