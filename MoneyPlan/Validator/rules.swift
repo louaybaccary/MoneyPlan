@@ -10,7 +10,7 @@ import Foundation
 import Validator
 
 class rules{
-
+//to review
   //  let emailRule = ValidationRulePattern(pattern: EmailValidationPattern.standard,error : someValidationErrorType)
     //let rule = ValidationRuleSet<Any>()
     class func isValidEmail(testStr:String) -> Bool {
