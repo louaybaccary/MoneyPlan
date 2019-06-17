@@ -42,8 +42,6 @@ class Controller: UIViewController {
         today.alpha = 1
         week.alpha = 0
         month.alpha = 0
-  //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
-        // Do any additional setup after loading the view.
     }
     
 
