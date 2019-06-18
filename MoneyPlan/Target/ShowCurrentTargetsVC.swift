@@ -14,7 +14,16 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData3()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData3), name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+
+        
          //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
+                // Do any additional setup after loading the view.
+    }
+    
+    @objc func fetchData3(){
         API.getTransaction(username: API.getID(),type: "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
@@ -22,7 +31,7 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
                 self.tableView.reloadData()
             }
         }
-        // Do any additional setup after loading the view.
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,7 +49,7 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
         let image = contentView?.viewWithTag(2) as! UIImageView
         let name = cell!.viewWithTag(3) as! UILabel
         let money = cell!.viewWithTag(4) as! UILabel
-        image.image = UIImage (named: Images[indexPath.item])
+        image.image = UIImage (named: transactions[indexPath.item].image)
         name.text = transactions[indexPath.item].name
         print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
@@ -56,6 +65,9 @@ let Images = ["airplane","ambulance","analytics","backpack","ball","book","birth
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+            self.fetchData3()
+
         }
         
         

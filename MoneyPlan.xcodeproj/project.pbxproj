@@ -333,7 +333,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -350,7 +350,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MoneyPlan/Pods-MoneyPlan-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E03C8A5AD2A345AB1501AD4C /* [CP] Check Pods Manifest.lock */ = {

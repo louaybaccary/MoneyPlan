@@ -15,7 +15,15 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
     var transactions = [Transaction]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData2()
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData2), name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+
      //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    @objc func fetchData2(){
         API.getCompletedTarget(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
@@ -23,9 +31,7 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
                 self.tableView.reloadData()
             }
         }
-        // Do any additional setup after loading the view.
     }
-    
 
   
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,7 +49,7 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
         let image = contentView?.viewWithTag(2) as! UIImageView
         let name = cell!.viewWithTag(3) as! UILabel
         let money = cell!.viewWithTag(4) as! UILabel
-        image.image = UIImage (named: Images[indexPath.item])
+        image.image = UIImage (named: transactions[indexPath.item].image)
         name.text = transactions[indexPath.item].name
         print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
@@ -70,6 +76,8 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+
         }
        
         return [deletAction,repeatction]

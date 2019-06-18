@@ -49,14 +49,21 @@ class WeekViewController: UIViewController ,UITableViewDataSource,UITableViewDel
         super.viewDidLoad()
         super.viewDidLoad()
     //    self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
-        API.getWeek(username:API.getID()) { (error :Error?, transactions : [Transaction]?) in
-            if let transactions = transactions {
-                
-                self.transactions = transactions
-                self.tableView.reloadData()
-            }
-        }
+        
+        fetchData6()
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData6), name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func fetchData6(){
+        API.getWeek(username:API.getID()) { (error :Error?, transactions : [Transaction]?) in
+        if let transactions = transactions {
+        
+        self.transactions = transactions
+        self.tableView.reloadData()
+        }
+        }
     }
     
 }

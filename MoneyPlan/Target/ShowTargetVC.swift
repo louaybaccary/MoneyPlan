@@ -51,10 +51,24 @@ return [deletAction]
 
 }
     override func viewDidLoad() {
-           self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
+          // self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
         super.viewDidLoad()
-     
+        fetchData3()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData3), name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+        
+        
         API.getTransaction(username: API.getID(),type : "target") { (error :Error?, transactions : [Transaction]?) in
+            if let transactions = transactions {
+                print(API.getID())
+                self.transactions = transactions
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+    @objc func fetchData3(){
+        API.getTransaction(username: API.getID(),type: "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
                 self.transactions = transactions
@@ -63,5 +77,4 @@ return [deletAction]
         }
         
     }
-
 }

@@ -10,12 +10,12 @@ import UIKit
 import SCLAlertView
 class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource , UICollectionViewDataSource, UICollectionViewDelegate{
 
-    var Category = ""
-    var Image = ""
+    var Category = "Clothes"
+    var Image = "airplane"
     override func viewDidLoad() {
        //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
-          self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
+          //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
         self.picker.delegate = self
         self.picker.dataSource = self
         pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]
@@ -45,15 +45,33 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func btnAdd(_ sender: Any) {
         let name = textName.text
         let money = textMoney.text
+       self.showSpinner(onView: self.view)
         if self.isStringAnInt(string : money!){
             API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
-            print(Category+Image)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            
+            //print("hhhhhhhhhhhhh : " + Category+Image)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+                self.removeSpinner()
+                self.navigationController?.popViewController(animated: true)
+            }
         }
+            
         else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+                self.removeSpinner()
+                
+            }
             self.digitAlert()
         }
        
     }
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var picker: UIPickerView!
     var pickerData: [String] = [String]()
@@ -83,7 +101,28 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     }
    
     func digitAlert(){
-        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
+        SCLAlertView().showInfo("You should type valid name and money", subTitle: "Please type again")
         
+    }
+    var vSpinner : UIView?
+    func showSpinner(onView : UIView) {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let ai = UIActivityIndicatorView.init(style: .whiteLarge)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            onView.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
+    }
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            self.vSpinner?.removeFromSuperview()
+            self.vSpinner = nil
+        }
     }
 }

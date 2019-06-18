@@ -9,22 +9,9 @@
 import UIKit
 
 class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate  {
-
-    @IBOutlet weak var tableView: UITableView!
       let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
+    @IBOutlet weak var tableView: UITableView!
     var transactions = [Transaction]()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-     //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
-        API.getWhatWhish(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
-            if let transactions = transactions {
-                
-                self.transactions = transactions
-                self.tableView.reloadData()
-            }
-        }
-        // Do any additional setup after loading the view.
-    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -40,13 +27,21 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
         let image = contentView?.viewWithTag(1) as! UIImageView
         let name = cell!.viewWithTag(2) as! UILabel
         let money = cell!.viewWithTag(3) as! UILabel
-        image.image = UIImage (named: Images[indexPath.item])
+        image.image = UIImage (named: transactions[indexPath.item].image)
         name.text = transactions[indexPath.item].name
         print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
-   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchData1()
+        //     self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData1), name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+        //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
+        
+        // Do any additional setup after loading the view.
+    }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let moveToTargetAction = UITableViewRowAction(style: .normal, title: "Move to target") { (UITableViewRowAction
@@ -59,11 +54,21 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
             print(String(self.transactions[indexPath.item].id))
             print(API.getID())
             
-            API.moveToTarget(id: String(self.transactions[indexPath.item].id), userID: API.getID())
-            self.transactions.remove(at: IndexPath.row)
+            //API.moveToTarget(id: String(self.transactions[indexPath.item].id), userID: API.getID())
+            API.moveToTarget(id:String(self.transactions[indexPath.item].id), userID: API.getID())
+           self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
-            
+             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            self.fetchData1()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
         }
         let deleteActionAction = UITableViewRowAction(style: .default, title: "Delete") { (UITableViewRowAction
             , IndexPath) in
@@ -77,6 +82,8 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+self.fetchData1()
             
         }
         
@@ -84,6 +91,14 @@ class ShowWhatWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
         
     }
     
-
+    @objc func fetchData1(){
+        API.getWhatWhish(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
+            if let transactions = transactions {
+                
+                self.transactions = transactions
+                self.tableView.reloadData()
+            }
+        }
+    }
     
 }

@@ -41,7 +41,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="460.79998779296875" height="259.20001220703125"/>
-        <image name="logo" width="150" height="150"/>
+        <image name="background" width="750" height="1334"/>
+        <image name="logo" width="200" height="200"/>
     </resources>
 </document>

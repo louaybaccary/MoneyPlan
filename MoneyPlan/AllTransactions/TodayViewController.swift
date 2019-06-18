@@ -39,15 +39,24 @@ class TodayViewController: UIViewController ,UITableViewDataSource,UITableViewDe
             image.image = UIImage (named: "logo")
         }
         
-        name.text = transactions[indexPath.item].name
+        money.text = transactions[indexPath.item].name
         print(transactions[indexPath.item].name)
-        money.text = String(transactions[indexPath.item].trMoney)
+        name.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        fetchData7()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData7), name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
+
       //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    @objc func fetchData7(){
         API.getToday(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 
@@ -55,7 +64,6 @@ class TodayViewController: UIViewController ,UITableViewDataSource,UITableViewDe
                 self.tableView.reloadData()
             }
         }
-        // Do any additional setup after loading the view.
     }
 
 }

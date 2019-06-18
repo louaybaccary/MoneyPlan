@@ -89,11 +89,13 @@ class API: NSObject {
     class func  AddTarget(username :String,name : String , money : String ,category : String,image : String,type :String)
     {
         let url = "http://"+myIp+":3000/Insert/"+name+"/"+image+"/"+type+"/"+category+"/"+money+"/"+username
+        print(url)
         Alamofire.request(url)
        
     }
     class func getTransaction(username : String ,type : String, completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
         let url = "http://"+myIp+":3000/getTransactions/"+username+"/"+type
+        print(url)
         Alamofire.request(url).responseJSON {response in
             switch response.result {
             case .failure(let error) :
@@ -149,6 +151,7 @@ class API: NSObject {
     class func  moveToTarget(id :String, userID : String)
     {
         let url = "http://"+myIp+":3000/Updatetype/"+id+"/"+userID
+        print(url)
         Alamofire.request(url)
         
     }
@@ -189,6 +192,7 @@ class API: NSObject {
     class func getCompletedTarget(username : String , completion :@escaping(_ error :Error?,_ transaction : [Transaction]?)-> Void){
         let url = "http://"+myIp+":3000/getCompletedTargets/"+username
         Alamofire.request(url).responseJSON {response in
+            print(url)
             switch response.result {
             case .failure(let error) :
                 completion(error,nil)
@@ -240,10 +244,10 @@ class API: NSObject {
                         return
                     }
                     let transaction = Transaction()
-                    transaction.id = data["id"]?.int ?? 0
+                    transaction.id = data["Id"]?.int ?? 0
                     transaction.name = data["name"]?.string ?? "no data"
                    // print(transaction.name)
-                    transaction.image = data["image"]?.string ?? "no data"
+                    transaction.image = data["Image"]?.string ?? "no data"
                     transaction.category = data["category"]?.string ?? "no data"
                     transaction.trMoney = data["transaction_money"]?.int ?? 0
                     transaction.currentMoney = data["currentMoney"]?.int ?? 0
@@ -364,6 +368,7 @@ class API: NSObject {
         
     }
     class func create(id : String , username : String){
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         //We need to create a context from this container
@@ -373,7 +378,10 @@ class API: NSObject {
         let userEntity = NSEntityDescription.entity(forEntityName: "LocalInfo", in: managedContext)!
         let user = NSManagedObject(entity: userEntity, insertInto: managedContext)
         user.setValue(id, forKey: "id")
+        print("create")
+        print("inside create function"+id)
         user.setValue(username, forKey: "username")
+        print("inside create function"+username)
         
     }
   
@@ -426,5 +434,26 @@ class API: NSObject {
        // print(username)
         return username
     }
-    
+    class func deleteAll(){
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        //We need to create a context from this container
+        let managedContext = appDelegate!.persistentContainer.viewContext
+        
+        //Prepare the request of type NSFetchRequest  for the entity
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LocalInfo")
+        fetchRequest.returnsObjectsAsFaults = false
+        
+        do
+        {
+            let results = try managedContext.fetch(fetchRequest)
+            for managedObject in results
+            {
+                let managedObjectData:NSManagedObject = managedObject as! NSManagedObject
+                managedContext.delete(managedObjectData)
+            }
+        } catch let error as NSError {
+            print("Detele all data in \("LocalInfo") error : \(error) \(error.userInfo)")
+        }
+}
 }

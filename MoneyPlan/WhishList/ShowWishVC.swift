@@ -44,6 +44,9 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
                 self.transactions = transactions
                 self.tableView.reloadData()
             }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            
+            self.fetchData()
         }
         // Do any additional setup after loading the view.
     }
@@ -57,7 +60,9 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
-         
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            
+            self.fetchData()
         }
         let deleteActionAction = UITableViewRowAction(style: .default, title: "Delete") { (UITableViewRowAction
             , IndexPath) in
@@ -67,7 +72,9 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
-         
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+            
+            self.fetchData()
         }
         
         return [moveToTargetAction,deleteActionAction]
@@ -75,4 +82,13 @@ class ShowWishVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
     }
 
 
+    @objc func fetchData(){
+        API.getTransaction(username: API.getID(),type : "wish") { (error :Error?, transactions : [Transaction]?) in
+            if let transactions = transactions {
+                
+                self.transactions = transactions
+                self.tableView.reloadData()
+            }
+        }
+    }
 }

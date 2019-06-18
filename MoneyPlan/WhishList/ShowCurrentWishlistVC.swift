@@ -27,7 +27,7 @@ class ShowCurrentWishlistVC:  UIViewController ,UITableViewDataSource,UITableVie
         let image = contentView?.viewWithTag(1) as! UIImageView
         let name = cell!.viewWithTag(2) as! UILabel
         let money = cell!.viewWithTag(3) as! UILabel
-        image.image = UIImage (named: Images[indexPath.item])
+        image.image = UIImage (named: transactions[indexPath.item].image)
         name.text = transactions[indexPath.item].name
         print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
@@ -35,14 +35,11 @@ class ShowCurrentWishlistVC:  UIViewController ,UITableViewDataSource,UITableVie
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
       //     self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
-        API.getTransaction(username: API.getID(),type : "wish") { (error :Error?, transactions : [Transaction]?) in
-            if let transactions = transactions {
-                
-                self.transactions = transactions
-                self.tableView.reloadData()
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+
+        
         // Do any additional setup after loading the view.
     }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -56,11 +53,24 @@ class ShowCurrentWishlistVC:  UIViewController ,UITableViewDataSource,UITableVie
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
-            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+
+            self.fetchData()
         }
         
         return [deleteActionAction]
         
     }
+    
+    @objc func fetchData(){
+        API.getTransaction(username: API.getID(),type : "wish") { (error :Error?, transactions : [Transaction]?) in
+            if let transactions = transactions {
+                
+                self.transactions = transactions
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
 
 }

@@ -30,14 +30,21 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     
     let Images = ["airplane","ambulance","analytics","backpack","ball","book","birthday-cake","brainstorm","business-partnership","car","coffee","commission","contract","drama","emergency","food","friends","grandparents","growth","home","hotel","newlyweds","sexual-harassment","taxi","workspace"]
     override func viewDidLoad() {
-        print(API.getusername())
-        print(API.getID())
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "mainPhoto")!)
-        API.getUser(username: username) { (error :Error?, myUser :[User]?) in
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
+         fetchData4()
+        //Get The connected user details
+        API.getUser(username: API.getusername()) { (error :Error?, myUser :[User]?) in
             if let myUser = myUser {
                 self.myUser = myUser
-                self.reloadInputViews()
+                //Displaying the amount of money (changing the color of the money)
                 self.moneyLabel.text = String(myUser[0].money)
                 if ( myUser[0].money > 100){
                     self.moneyLabel.textColor = UIColor.green
@@ -52,13 +59,20 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
             }
         
         }
-        API.getTransaction(username: id,type : "target") { (error :Error?, transactions : [Transaction]?) in
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData4), name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+
+        fetchData4()
+    }
+    //Geting all the target of the connected user
+    @objc func fetchData4(){
+        API.getTransaction(username: API.getID(),type : "target") { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
                 self.transactions = transactions
                 self.tableView.reloadData()
             }
         }
     }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -74,10 +88,12 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         let name = cell!.viewWithTag(2) as! UILabel
         let currentMoney = cell!.viewWithTag(4) as! UIProgressView
         let money = cell!.viewWithTag(3) as! UILabel
-        image.image = UIImage (named: Images[indexPath.item])
+        image.image = UIImage (named: transactions[indexPath.item].image)
+        let per = (Float(transactions[indexPath.item].currentMoney)) /  (Float(transactions[indexPath.item].trMoney))
         name.text = transactions[indexPath.item].name
-        let per = ((transactions[indexPath.item].currentMoney) * 100) /  (transactions[indexPath.item].trMoney)
-        currentMoney.setProgress(Float(per), animated: false)
+        
+        print(per)
+        currentMoney.setProgress(Float(per), animated: true)
         money.text = String(transactions[indexPath.item].currentMoney)
         return cell!
     }
@@ -88,52 +104,81 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
         
         let plusAction = UITableViewRowAction(style: .normal, title: "+") { (UITableViewRowAction
             , IndexPath) in
-            let alert = SCLAlertView()
-            let txt = alert.addTextField("Enter the amount of money")
-            alert.addButton("+") {
-               // let guard
-                  //TODO : text = int
-                 if self.isStringAnInt(string: txt.text!) == true {
-                if (  (self.transactions[indexPath.item].trMoney) >= (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)){
-                      SCLAlertView().showSuccess("OK", subTitle: "")
-                    API.setMoney(money: "-"+txt.text!, userID: API.getID())
-                    API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)), id: String(self.transactions[indexPath.row].id), userID:self.id)
-                  //  [Transaction]()
-                    self.tableView.reloadData()
-                    self.viewDidLoad()
-                } else if ((txt.text!) == ""  || (Int(txt.text!) == 0)) {
-                          SCLAlertView().showWarning("Warning", subTitle: "You can't add this amount")
-                }
-                else {
-                    self.digitAlert()
-                    }
-                 }
-            }
-            alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
-        }
-        let minusAction = UITableViewRowAction(style: .default, title: "-") { (UITableViewRowAction
-            , IndexPath) in
-            let alert = SCLAlertView()
-            let txt = alert.addTextField("Enter the amount of money")
-            //TODO : text = int
-            alert.addButton("-") {
-               if self.isStringAnInt(string: txt.text!) == true {
-                if ( (Int(txt.text!)!)  > self.transactions[indexPath.item].currentMoney){
-                      SCLAlertView().showWarning("Warning", subTitle: "You can't")
-                } else if ((txt.text!) == ""  || (Int(txt.text!) == 0)) {
-                    SCLAlertView().showSuccess("OK", subTitle: "")
-                    API.setMoney(money: txt.text!, userID: "1")
-                    API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID: self.id)
-                 //   [Transaction]()
-                    self.tableView.reloadData()
-                    self.viewDidLoad()
-                }  else {
-                    self.digitAlert()
-                }
-            }
+            let appearance = SCLAlertView.SCLAppearance(
                 
-            alert.showEdit("Edit View", subTitle: "This alert view shows a text box")
+                showCloseButton: false // hide default button
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            let txt = alert.addTextField("You can't add more than " + String(self.transactions[indexPath.item].trMoney-self.transactions[indexPath.item].currentMoney))
+            
+            alert.addButton("+") {
+                if self.isStringAnInt(string: txt.text!) == true
+                {
+                    if (  (self.transactions[indexPath.item].trMoney) >= (Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)   )
+                        {
+                            SCLAlertView().showSuccess("OK", subTitle: "Added Successfully")
+                            API.setMoney(money: "-"+txt.text!, userID: API.getID())
+                            API.setCurrentMoney(money: String((Int(txt.text!)!)+(self.transactions[indexPath.item].currentMoney)),id:String(self.transactions[indexPath.row].id), userID:API.getID())
+                            self.tableView.reloadData()
+                            self.viewDidLoad()
+                        }
+                    else if ((txt.text!) == ""  || (Int(txt.text!) == 0)) {
+                          SCLAlertView().showWarning("Warning", subTitle: "You should type valid numbers")
+                        }
+                    else {
+                         SCLAlertView().showWarning("Warning", subTitle: "You can't add this amount")
+                    }
+                    
+                 }
+                else{
+                SCLAlertView().showWarning("Warning", subTitle: "You should type valid numbers")
+                }
+            }
+            alert.addButton("Cancel") {
+                alert.hideView()
+            }
+            alert.showEdit("Add money", subTitle: "Enter the amount of money you want to add to this target, you can't add more than " + String(self.transactions[indexPath.item].trMoney-self.transactions[indexPath.item].currentMoney))
         }
+        let minusAction = UITableViewRowAction(style: .destructive, title: "-") { (UITableViewRowAction
+            , IndexPath) in
+            let appearance = SCLAlertView.SCLAppearance(
+                
+                showCloseButton: false // hide default button
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            let txt = alert.addTextField("Enter the amount of money you want to increase from this target, you can't increase more than " + String(self.transactions[indexPath.item].trMoney))
+            
+            alert.addButton("-") {
+                // let guard
+                //TODO : text = int
+                if self.isStringAnInt(string: txt.text!) == true
+                {
+                    if ( (Int(txt.text!)!)  > self.transactions[indexPath.item].currentMoney)
+                    {
+                        SCLAlertView().showWarning("Warning", subTitle: "You can't decrease this amount of money")
+                    }
+                    else if !((txt.text!) == ""  || (Int(txt.text!) == 0))
+                    {
+                        SCLAlertView().showSuccess("OK", subTitle: "")
+                        API.setMoney(money: txt.text!, userID: API.getID())
+                        API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID:API.getID())
+                        self.tableView.reloadData()
+                        self.viewDidLoad()
+                    }
+                    else {
+                        SCLAlertView().showWarning("Warning", subTitle: "You should type valid numbers")
+                    }
+                }
+                else
+                {
+                     SCLAlertView().showWarning("Warning", subTitle: "You should type valid numbers")
+                }
+                
+            }
+            alert.addButton("Cancel") {
+                alert.hideView()
+            }
+            alert.showEdit("Add money", subTitle: "Enter the amount of money you want to decrease from this target, you can't decrease more than " + String(self.transactions[indexPath.item].currentMoney))
         }
         return [plusAction,minusAction]
         
@@ -145,22 +190,37 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     
  
     @IBAction func min(_ sender: Any) {
-        let alert = SCLAlertView()
+        let appearance = SCLAlertView.SCLAppearance(
+            
+            showCloseButton: false // hide default button
+        )
+        let alert = SCLAlertView(appearance: appearance)
         let txt = alert.addTextField("Enter the amount of money")
         let name = alert.addTextField("Enter a name")
         alert.addButton("-") {
              //Todo txt = int
              if self.isStringAnInt(string: txt.text!) == true {
-           SCLAlertView().showSuccess("You did it", subTitle: "added successfully")
+           SCLAlertView().showSuccess("You did it", subTitle: "Decreased successfully")
             
             API.setMoney(money: "-"+txt.text!, userID: API.getID())
             API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "minus", image: "no", type: "minus")
             self.viewDidLoad()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
+                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
              }
              else {
                 self.digitAlert()
             }
             
+        }
+        alert.addButton("Cancel") {
+            alert.hideView()
         }
         alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
@@ -171,30 +231,99 @@ class MainPageViewController: UIViewController , UITableViewDelegate, UITableVie
     }
  
    func digitAlert(){
-        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
+    let appearance = SCLAlertView.SCLAppearance(
+        
+        showCloseButton: false // hide default button
+    )
+    let alert = SCLAlertView(appearance: appearance)
+    alert.addButton("Cancel") {
+        alert.hideView()
+    }
+
+        alert.showInfo("You should type numbers", subTitle: "Please type again")
         
     }
     
+    func digitAlert2(){
+        let appearance = SCLAlertView.SCLAppearance(
+            
+            showCloseButton: false // hide default button
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        alert.addButton("Cancel") {
+            alert.hideView()
+        }
+        alert.showInfo("Error", subTitle: "You can't add this amount of money")
+        
+    }
+
+    
     @IBAction func plusBtn(_ sender: Any) {
-        let alert = SCLAlertView()
+        let appearance = SCLAlertView.SCLAppearance(
+            
+            showCloseButton: false // hide default button
+        )
+        let alert = SCLAlertView(appearance: appearance)
         let txt = alert.addTextField("Enter the amount of money")
         let name = alert.addTextField("Enter a name")
         alert.addButton("+") {
             //Todo txt = int
             if self.isStringAnInt(string: txt.text!) == true {
-                SCLAlertView().showSuccess("You did it", subTitle: "added successfully")
+                SCLAlertView().showSuccess("You did it", subTitle: "Increased successfully")
                 
                 API.setMoney(money: txt.text!, userID: API.getID())
                 API.AddTarget(username: self.id, name: name.text!, money: txt.text!, category: "added", image: "no", type: "added")
                 self.viewDidLoad()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
             }
             else {
                 self.digitAlert()
             }
             
         }
+        alert.addButton("Cancel") {
+            alert.hideView()
+        }
         alert.showEdit("Enter the amount of money and a name", subTitle: "")
     }
 }
 
 
+/*
+ 
+ let minusAction = UITableViewRowAction(style: .default, title: "-") { (UITableViewRowAction
+ , IndexPath) in
+ let appearance = SCLAlertView.SCLAppearance(
+ 
+ showCloseButton: false
+ )
+ let alert = SCLAlertView(appearance: appearance)
+ let txt = alert.addTextField("Enter the amount of money, you can't increase more than " + String(self.transactions[indexPath.item].trMoney))
+ 
+ alert.addButton("-") {
+ if self.isStringAnInt(string: txt.text!) == true {
+ if ( (Int(txt.text!)!)  > self.transactions[indexPath.item].currentMoney){
+ SCLAlertView().showWarning("Warning", subTitle: "You can't increase this amount of money")
+ } else if !((txt.text!) == ""  || (Int(txt.text!) == 0)) {
+ SCLAlertView().showSuccess("OK", subTitle: "")
+ API.setMoney(money: txt.text!, userID: API.getID())
+ API.setCurrentMoney(money: String((self.transactions[indexPath.item].currentMoney)-(Int(txt.text!)!)), id: String(self.transactions[indexPath.row].id), userID:API.getID())
+ self.tableView.reloadData()
+ self.viewDidLoad()
+ }  else {
+ self.digitAlert()
+ }
+ }
+ alert.addButton("Cancel") {
+ alert.hideView()
+ }
+ alert.showEdit("Decrease money", subTitle: "Enter the amount of money")
+ }
+ }
+ 
+ */
