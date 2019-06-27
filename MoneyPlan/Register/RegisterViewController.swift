@@ -2,8 +2,8 @@
 //  RegisterViewController.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 12/21/18.
-//  Copyright © 2018 Louay Baccary. All rights reserved.
+//  Created by Louay Baccary  on 1/15/19.
+//  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
 import UIKit
@@ -24,22 +24,17 @@ class RegisterViewController: UIViewController {
         API.login(username: textUsername.text!, password: textPassword.text!) {
             success in
             if success{
-                 print("no")
               SCLAlertView().showInfo("Wrong Credentials,username already exist", subTitle: "Please type again")
             }
             else{
                 
-                if self.isStringAnInt(string: self.textMoney.text!){
-                    if self.isValidEmail(testStr : self.textEmail.text!){
+                if rules.isStringAnInt(string: self.textMoney.text!){
+                    if rules.isValidEmail(testStr : self.textEmail.text!){
                       API.register(username: self.textUsername.text!, email: self.textEmail.text!, password: self.textPassword.text!, money: String(self.textMoney.text!))
                       
-                      
-                        //    self.show(nextViewController, sender: Any?.self)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
                             self.removeSpinner()
-                         /*   let storyBoard : UIStoryboard = UIStoryboard(name: "LoginPage", bundle:nil)
-                            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginPage") as! MainPageViewController
-                            self.present(nextViewController, animated:true, completion:nil)*/
+
                             API.deleteAll()
                              self.navigationController?.popViewController(animated: true)
                         }
@@ -58,21 +53,20 @@ class RegisterViewController: UIViewController {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
                             self.removeSpinner()
                                                     }
-                         self.emailAlert()
+                         alert.emailAlert()
                 }
                 }else {
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
                         self.removeSpinner()
                     }
-                    self.digitAlert()
+                    alert.digitAlert()
                 }
                 API.getUser(username: self.textUsername.text!) { (error :Error?, myUser :[User]?) in
                     if let myUser = myUser {
                         self.myUser = myUser
-                        self.reloadInputViews()
-                        //  API.create(id: String(myUser[0].id), money: String(myUser[0].money), username: String(myUser[0].username))
-                        print("okok")
+
+
                         
                     }
                 }
@@ -85,34 +79,15 @@ class RegisterViewController: UIViewController {
             
         }
      
-       // print(textUsername.text!)
+
     }
     
 
 
     override func viewDidLoad() {
-      //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
         API.deleteAll()
-         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "back")!)
     
-    }
-    func isValidEmail(testStr:String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
-    }
-    func isStringAnInt(string: String) -> Bool {
-        return Int(string) != nil
-    }
-    func emailAlert(){
-        SCLAlertView().showInfo("Wrong email pattern", subTitle: "Please type again")
-        
-    }
-    func digitAlert(){
-        SCLAlertView().showInfo("You should type numbers", subTitle: "Please type again")
-        
     }
     var vSpinner : UIView?
     func showSpinner(onView : UIView) {

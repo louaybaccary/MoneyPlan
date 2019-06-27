@@ -2,8 +2,8 @@
 //  AddTargetVC.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 12/27/18.
-//  Copyright © 2018 Louay Baccary. All rights reserved.
+//  Created by Louay Baccary  on 1/15/19.
+//  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
 import UIKit
@@ -13,13 +13,10 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     var Category = "Clothes"
     var Image = "airplane"
     override func viewDidLoad() {
-       //   self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         super.viewDidLoad()
-          //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
         self.picker.delegate = self
         self.picker.dataSource = self
         pickerData = ["Clothes", "Medical", "Technology", "Food", "Luxuries", "Other"]
-        // Do any additional setup after loading the view.
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Images.count
@@ -45,19 +42,10 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     @IBAction func btnAdd(_ sender: Any) {
         let name = textName.text
         let money = textMoney.text
-       self.showSpinner(onView: self.view)
-        if self.isStringAnInt(string : money!){
-            API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
-            
-            //print("hhhhhhhhhhhhh : " + Category+Image)
+        self.showSpinner(onView: self.view)
+        if rules.isStringAnInt(string : money!){
+        API.AddTarget(username: API.getID(), name: name!, money: money!, category: Category, image: Image,type: "target")
+            notifications.notifications()
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
                 self.removeSpinner()
                 self.navigationController?.popViewController(animated: true)
@@ -69,7 +57,7 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
                 self.removeSpinner()
                 
             }
-            self.digitAlert()
+            alert.digitAlert()
         }
        
     }
@@ -97,15 +85,6 @@ class AddTargetVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSourc
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
-    }
-  
-    func isStringAnInt(string: String) -> Bool {
-        return Int(string) != nil
-    }
-   
-    func digitAlert(){
-        SCLAlertView().showInfo("You should type valid name and money", subTitle: "Please type again")
-        
     }
     var vSpinner : UIView?
     func showSpinner(onView : UIView) {

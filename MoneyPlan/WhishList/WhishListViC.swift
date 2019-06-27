@@ -2,7 +2,7 @@
 //  WhishListViC.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 1/15/19.
+//  Created by Louay Baccary  on 1/15/19.
 //  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
@@ -27,9 +27,9 @@ class WhishListViC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-          //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wishPhoto")!)
-        
-        // Do any additional setup after loading the view.
+        notifications.notifications()
+        wishView.alpha = 1
+        whatView.alpha = 0
     }
 
 

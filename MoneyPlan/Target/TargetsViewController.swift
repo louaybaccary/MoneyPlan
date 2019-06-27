@@ -2,7 +2,7 @@
 //  TargetsViewController.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 1/14/19.
+//  Created by Louay Baccary  on 1/15/19.
 //  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
@@ -23,9 +23,9 @@ class TargetsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
-        // Do any additional setup after loading the view.
+        notifications.notifications()
+        current.alpha = 1
+        finished.alpha = 0
     }
     
 

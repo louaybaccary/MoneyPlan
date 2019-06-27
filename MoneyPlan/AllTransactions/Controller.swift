@@ -2,7 +2,7 @@
 //  Controller.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 1/15/19.
+//  Created by Louay Baccary  on 1/15/19.
 //  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
@@ -42,6 +42,8 @@ class Controller: UIViewController {
         today.alpha = 1
         week.alpha = 0
         month.alpha = 0
+        notifications.notifications()
+        
     }
     
 

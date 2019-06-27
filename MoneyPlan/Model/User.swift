@@ -2,10 +2,9 @@
 //  User.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 12/26/18.
-//  Copyright © 2018 Louay Baccary. All rights reserved.
+//  Created by Louay Baccary  on 1/15/19.
+//  Copyright © 2019 Louay Baccary. All rights reserved.
 //
-
 import UIKit
 
 class User: NSObject {

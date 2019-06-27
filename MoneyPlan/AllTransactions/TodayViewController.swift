@@ -2,7 +2,7 @@
 //  TodayViewController.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 1/15/19.
+//  Created by Louay Baccary  on 1/15/19.
 //  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
@@ -40,26 +40,17 @@ class TodayViewController: UIViewController ,UITableViewDataSource,UITableViewDe
         }
         
         money.text = transactions[indexPath.item].name
-        print(transactions[indexPath.item].name)
         name.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-      
         fetchData7()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchData7), name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
-
-      //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
-        
-        // Do any additional setup after loading the view.
+        notifications.notifications()
     }
-    
     @objc func fetchData7(){
         API.getToday(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
-                
                 self.transactions = transactions
                 self.tableView.reloadData()
             }

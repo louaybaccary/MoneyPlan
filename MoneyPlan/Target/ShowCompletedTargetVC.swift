@@ -2,7 +2,7 @@
 //  ShowCompletedTargetVC.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 1/14/19.
+//  Created by Louay Baccary  on 1/15/19.
 //  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
@@ -16,17 +16,11 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData2()
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchData2), name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
-
-     //  self.view.backgroundColor = UIColor(patternImage: UIImage(named: "targetPhoto")!)
-        
-        // Do any additional setup after loading the view.
+        notifications.notifications()
     }
-    
     @objc func fetchData2(){
         API.getCompletedTarget(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
             if let transactions = transactions {
-                
                 self.transactions = transactions
                 self.tableView.reloadData()
             }
@@ -44,14 +38,12 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "target")
-        
         let contentView = cell?.viewWithTag(1)
         let image = contentView?.viewWithTag(2) as! UIImageView
         let name = cell!.viewWithTag(3) as! UILabel
         let money = cell!.viewWithTag(4) as! UILabel
         image.image = UIImage (named: transactions[indexPath.item].image)
         name.text = transactions[indexPath.item].name
-        print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
@@ -61,18 +53,10 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
             , IndexPath) in
             API.deleteTransaction(id: String(self.transactions[indexPath.item].id))
             self.tableView.beginUpdates()
-            // ** add below line. **
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
+            notifications.notifications()
         }
         let repeatction = UITableViewRowAction(style: .normal, title: "Repeat") { (UITableViewRowAction
             , IndexPath) in
@@ -80,20 +64,10 @@ class ShowCompletedTargetVC: UIViewController ,UITableViewDataSource,UITableView
             API.AddTarget(username: API.getID(), name: self.transactions[indexPath.item].name, money: String(self.transactions[indexPath.item].trMoney), category: self.transactions[indexPath.item].category, image: self.transactions[indexPath.item].image, type: "target")
             API.deleteTransaction(id: String(self.transactions[indexPath.item].id))
             self.tableView.beginUpdates()
-            // ** add below line. **
             self.transactions.remove(at: IndexPath.row)
             self.tableView.deleteRows(at: [IndexPath], with: .automatic)
             self.tableView.endUpdates()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData1"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData2"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData3"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData4"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData6"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchData7"), object: nil)
-
+            notifications.notifications()
         }
        
         return [deletAction,repeatction]

@@ -2,7 +2,7 @@
 //  MonthViewController.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 1/15/19.
+//  Created by Louay Baccary  on 1/15/19.
 //  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
@@ -41,24 +41,18 @@ class MonthViewController: UIViewController ,UITableViewDataSource,UITableViewDe
         }
         
         name.text = transactions[indexPath.item].name
-        print(transactions[indexPath.item].name)
         money.text = String(transactions[indexPath.item].trMoney)
         return cell!
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
-  //       self.view.backgroundColor = UIColor(patternImage: UIImage(named: "transactionsPhoto")!)
         fetchData5()
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchData5), name: NSNotification.Name(rawValue: "fetchData5"), object: nil)
-
-        // Do any additional setup after loading the view.
+        notifications.notifications()
     }
     
     @objc func fetchData5(){
-        API.getWeek(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
+        API.getMonth(username: API.getID()) { (error :Error?, transactions : [Transaction]?) in
         if let transactions = transactions {
-    
         self.transactions = transactions
         self.tableView.reloadData()
         }

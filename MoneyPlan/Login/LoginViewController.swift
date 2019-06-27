@@ -2,8 +2,8 @@
 //  LoginViewController.swift
 //  MoneyPlan
 //
-//  Created by Moncef Guettat on 12/23/18.
-//  Copyright © 2018 Louay Baccary. All rights reserved.
+//  Created by Louay Baccary  on 1/15/19.
+//  Copyright © 2019 Louay Baccary. All rights reserved.
 //
 
 import UIKit
@@ -15,21 +15,15 @@ class LoginViewController: UIViewController {
 
     var myUser = [User]()
     override func viewDidLoad() {
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         API.deleteAll()
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+
     }
-    //TODO Connect with facebook
+
     
     @IBAction func LoginBtn(_ sender: Any) {
-        //TODO
-        //Controle de Saisie
-        
             self.showSpinner(onView: self.view)
-       
-        
         API.login(username: textUsername.text!, password: textPassword.text!) {
             success in
             if success{
@@ -37,18 +31,13 @@ class LoginViewController: UIViewController {
                     if let myUser = myUser {
                         self.myUser = myUser
                         self.reloadInputViews()
-                        
                         API.create(id: String(myUser[0].id), username: myUser[0].username)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
                             self.removeSpinner()
                             self.performSegue(withIdentifier: "toHome", sender: self)
                         }
-                        
-                        
                         }
                     }
-               
-
                 }
            else {
 
@@ -57,16 +46,11 @@ class LoginViewController: UIViewController {
             }
           
         }
-       // self.removeSpinner()
+
 
 }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let HomePage = segue.destination as? MainPageViewController {
-           // HomePage.username = API.getusername()
-            //HomePage.id = API.getID()
-        }
-    }
+   
     var vSpinner : UIView?
     func showSpinner(onView : UIView) {
         let spinnerView = UIView.init(frame: onView.bounds)
